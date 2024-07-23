@@ -1,0 +1,215 @@
+.imagens_container{
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #eae9e9;
+    border-radius: 0 0 15px 15px;
+    & img{
+        height: 100%;
+        border-radius: 0 0 15px 15px;
+        min-height: 260px;
+        max-width: 100%;
+        box-shadow: 2px 1px 20px #0000003a;
+    }
+    & .change_image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+    }
+}
+.noPic{
+    background-color: #ccc;
+    width: 100%;
+    height: 280px;
+    font-size: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #818181;
+    position: relative;
+    border-radius: 0 0 20px 20px;
+}
+.noPic svg{
+    background-color: #ccc;
+    z-index: 3;
+    padding: 10px;
+    border-radius: 20px;
+}
+.noPic .line{
+    height: 20px;
+    width: 100%;
+    background-color: #818181;
+    position: absolute;
+    border-radius: 20px;
+    transform: rotate(20deg);
+}
+.casa_info_cont{
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: #e4e4e4;
+    padding: 10px 25px;
+    box-shadow: 2px 1px 20px #5555553a;
+    & h1{
+        color: #192436;
+        font-size: 30px;
+    }
+    & .address{
+        text-align: center;
+        font-size: 12px;
+        color: #818181;
+        font-weight: 600;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 1px;
+        margin-top: 15px;
+        & svg{
+            width: 15px;
+        }
+    }
+}
+.title{
+    color: #818181;
+    margin-top: 20px;
+}
+.fast_info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 20px;
+    color: #192436;
+}
+
+.description{
+    padding-left: 10px;
+    margin-left: 5px;
+    color: #192436;
+    font-size: 14px;
+    border-left: 3px solid #192436;
+}
+
+h4{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.contact{
+    padding: 15px 25px;
+    margin-top: 30px;
+    background-color: #192436;
+    border-radius: 20px;
+    color: #818181;
+    & h2{
+        color: #C5AD69;
+    }
+    & h4{
+        text-align: left;
+    }
+    & span{
+        color: #C5AD69;
+    }
+}
+.image_label {
+    display: flex;
+    position: relative;
+    margin-right: 18px;
+    z-index: 0;
+}
+  
+.image_label span {
+    position: absolute;
+    top: -55px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    transition: all .3s ease;
+    background-color: #ccc;
+    box-shadow: 0 0 10px 2px #0000003a;
+}
+.image_label input[type='radio'] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.image_label input[type='radio']:checked + span {
+    background-color: #ccc;
+    width: 30px;
+    border-radius: 20px;
+    margin-left: -7px;
+}
+.control{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 230px;
+    & button{
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        font-size: 20px;
+        background-color: #ccc;
+        box-shadow: 2px 1px 10px #0000003a;
+        opacity: 0.75;
+        transition: all .5s ease;
+        & svg{
+            display: block;
+            margin-left: 10px;
+            color: #192436;
+        }
+    }
+}
+.control button:hover{
+    opacity: 1;
+}
+
+
+
+@media screen and (min-width: 481px) {
+    .image_label span{
+        top: -30px;
+    }
+}
+
+@media screen and (min-width: 788px){
+    .imagens_container{
+        min-height: 450px;
+        max-width: 1024px;
+        margin: auto;
+    }
+    .casa_info_cont{
+        max-width: 1024px;
+        margin: 30px auto;
+        padding: 30px 50px;
+    }
+    .contact{
+        max-width: 1024px;
+        margin: 30px auto 0;
+    }
+    .noPic{
+        height: 450px;
+        font-size: 6em;
+    }
+    .control{
+        top: 320px;
+        max-width: 1024px;
+    }
+    .control > button:nth-child(1){
+        margin-left: 50px;
+    }
+    .control > button:nth-child(2){
+        margin-right: 50px;
+    }
+}

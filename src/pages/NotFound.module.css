@@ -1,0 +1,40 @@
+.container_error{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
+    padding: 10px 10px;
+    & svg{
+        max-width: 90%;
+        margin-bottom: 30px;
+    }
+}
+.ilustration{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text{
+    padding: 10px 25px;
+    text-align: center;
+    color: #192436;
+    & p{
+        margin-bottom: 30px;
+    }
+    & button{
+        width: 100%;
+        margin: 50px auto;
+    }
+}
+@media screen and (min-width: 788px ) {
+    .container_error{
+        max-width: 1024px;
+        flex-direction: row;
+        align-items: center;
+        margin: 80px auto;
+        gap: 20px;
+    }
+    
+}

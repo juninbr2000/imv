@@ -1,0 +1,32 @@
+.stlBtn{
+    background-color: #25D366;
+    padding: 12px;
+    font-size: 1.8em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    position: fixed; 
+    bottom: 40px;
+    right: 20px;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+.stlBtn::after{
+    content: '';
+    opacity: 0;
+    transition: width .5s ease, opacity 1.5s ease, color 1.5s ease;
+    font-size: .6em;
+    color: transparent;
+    width: 0;
+    height: 30px;
+}
+.stlBtn:hover::after{
+    content: 'agendar por Whatsapp';
+    text-decoration: none;
+    margin-left: 20px;
+    color: #fff;
+    opacity: 1;
+    width: 220px;
+}

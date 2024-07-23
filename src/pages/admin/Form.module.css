@@ -1,0 +1,156 @@
+.form_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f1f1f1;
+    box-shadow: 1px 2px 15px #00000044;
+    width: 300px;
+    border-radius: 10px;
+    margin: 50px auto;
+    padding: 20px 10px;
+    & .header_msg{
+        margin-bottom: 30px;
+        text-align: center;
+        color: #818181;
+    }
+    & button{
+        width: 100%;
+    }
+    & button:disabled{
+        cursor: not-allowed;
+    }
+}
+.label_input{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    & span{
+        color: #192436;
+    }
+    & input{
+        border: none;
+        border-bottom: 1px solid;
+        margin-bottom: 20px;
+        padding: 2px 5px;
+        background-color: #f1f1f1;
+        width: 250px;
+    }
+}
+
+
+
+.imageGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 20px 15px;
+    align-items: center;
+    justify-content: flex-start;
+    & img {
+        width: 80px;
+    }
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.adicionais{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.adicional_input{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & label{
+        margin-left: 20px;
+    }
+    & input{
+        width: 80%;
+        border: none;
+        padding: 2px 5px;
+        background-color: transparent;
+        border-bottom: 1px solid;
+    }
+}
+.radio{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    & label{
+        margin-top: 5px;
+    }
+    & input{
+        margin-left: 10px;
+    }
+}
+
+.text_area{
+    color: #192436;
+    padding: 5px 15px;
+    & span{
+        margin-bottom: 15px;
+    }
+    textarea{
+        border: none;
+        width: 100%;
+        border-bottom: 1px solid #192436;
+        background-color: transparent;
+        resize: none;
+    }
+}
+
+.image_inp{
+    color: #192436;
+    padding: 10px 20px;
+    width: 100%;
+    & input{
+        padding: 20;
+        border: none;
+    }
+}
+.erro{
+    color: rgb(163, 0, 0);
+    font-size: 12px;
+}
+.campos_adicionais{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    & label{
+        width: 50%;
+    }
+    & input[type=text]{
+        width: 70%;
+    }
+}
+
+
+@media screen and (min-width: 788px){
+    .form_container{
+        width: 620px;
+        padding: 30px 60px;
+    }  
+    .label_input{
+        width: 100%;
+        & input{
+            width: 100%;
+        }
+    } 
+
+    .adicionais{
+        width: 100%;
+        gap: 60px;
+    }
+    .text_area{
+        width: 100%;
+    }
+}
