@@ -18,7 +18,7 @@ import EditDoc from "./pages/admin/EditDoc";
 import Footer from "./components/Footer";
 import Aboult from "./pages/Aboult";
 import NotFound from "./pages/NotFound";
-import Inicio from "./pages/inicio";
+// import Inicio from "./pages/inicio";
 
 
 function App() {
