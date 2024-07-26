@@ -57,7 +57,7 @@ function App() {
           <Route path="/" element={<HomeBuild/> } />
           <Route path="*" element={<NotFound />} />
           <Route path="/home" element={!user ? <Login /> : <Home /> } />
-          <Route path="/:id" element={!user? <Login /> : <Casa />} />
+          <Route path="/:id" element={!user ? <Login /> : <Casa />} />
           <Route path="/contato" element={!user ? <Login/> : <Contacts />} />
           <Route path="/sobre" element={!user ? <Login /> : <Aboult />} />
           <Route path="/dashboard" element={!user ? <Login/> : <Dashboard />} />
