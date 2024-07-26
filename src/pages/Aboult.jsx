@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaBuilding, FaHome, FaUserFriends, FaPhone, FaWhatsapp, FaArrowRight } from 'react-icons/fa'
+import { FaBuilding, FaHome, FaUserFriends, FaPhone, FaWhatsapp, FaArrowRight , FaClipboardList} from 'react-icons/fa'
 import styles from './About.module.css'
 import { useNavigate, Link } from 'react-router-dom'
 
@@ -34,6 +34,13 @@ const Aboult = () => {
               </div>
               <h3>Aluguel de Imóveis</h3>
               <p>Se você está procurando alugar um imóvel, nós temos uma ampla seleção de opções disponíveis para atender às suas necessidades. Estamos sempre dispostos a encontrar o imóvel perfeito para você.</p>
+            </li>
+            <li>
+              <div className={styles.icons}>
+                <FaClipboardList/>
+              </div>
+              <h3>Avaliação de Imóveis</h3>
+              <p>Oferecemos serviços de avaliação de imóveis precisos e confiáveis para ajudá-lo a determinar o valor de mercado da sua propriedade.</p>
             </li>
           </ul>
         </div>

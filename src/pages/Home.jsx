@@ -21,10 +21,6 @@ const Home = () => {
         setCurrentPage(1); // Reset page to 1 on filter change
     };
 
-    console.log(location)
-    console.log(sale)
-    console.log(aluguel)
-
     if (loading) {
         return (
             <div className="spinner">
@@ -50,7 +46,7 @@ const Home = () => {
     return (
         <div className='container'>
             <header className='header_style'>
-                <h1>Te ajudando a encontrar seu Lar ideal!</h1>
+                <h1>Te ajudamos a encontrar seu Lar ideal!</h1>
                 <p className='creditos'>
                     Foto de <a href="https://unsplash.com/pt-br/@webaliser?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ярослав Алексеенко</a> na <a href="https://unsplash.com/pt-br/fotografias/white-and-brown-concrete-building-under-blue-sky-during-daytime-_TPTXZd9mOo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
                 </p>

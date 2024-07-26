@@ -89,9 +89,6 @@ const EditDoc = () => {
             venda
         })
 
-        console.log(response)
-        
-
         navigate("/dashboard")
       }
       if(formError !== ""){

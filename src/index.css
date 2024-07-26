@@ -207,6 +207,12 @@
     margin-left: 40px;
   }
 }
+@media screen and (min-width: 706px) {
+  .card-area{
+    padding: 25px 30px;
+    justify-content: space-between;
+  }
+}
 
 @media screen and (min-width: 788px) {
   .header_style{
@@ -218,6 +224,11 @@
   .search{
     padding: 5px 40px;
   }
+  .card-area > div:nth-last-child(1){
+    justify-self: flex-start;
+    margin-right: 300px;
+    float: left;
+  } 
 }
 @media screen and (min-width: 1024px) {
   .container{
@@ -234,4 +245,33 @@
   .cards{
     width: 1024px;
   }
+  .card-area{
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  .card-area > div:nth-last-child(1){
+    margin: 0;
+  }
+
+}
+
+
+
+.advice{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 30px;
+  justify-content: center;
+  max-width: 1024px;
+  margin: 0 auto;
+  min-height: 60vh;
+  font-size: 10px;
+  gap: 30px;
+}
+@media screen and (min-width: 1024px) {
+  .advice{
+    display: flex;
+    flex-direction: row;
+  }  
 }

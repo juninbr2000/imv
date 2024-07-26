@@ -8,7 +8,7 @@ const WhatsappBtn = ({mensagem}) => {
     const configMSG = mensagem.replace( / /g , '%20')
 
   return (
-    <Link to={`https://wa.me/5535998990790?text=${configMSG}`} className={styles.stlBtn}>
+    <Link to={`https://wa.me/5535998990790?text=${configMSG}`} target='_blank' className={styles.stlBtn}>
         <FaWhatsapp/>
     </Link>
   )

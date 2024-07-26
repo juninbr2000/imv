@@ -34,7 +34,7 @@ const Login = () => {
   return (
     <div>
         <form onSubmit={handleSubmit} className={styles.form_container}>
-            <p className={styles.header_msg}>Em caso de duvidas entre em contato com ...</p>
+            <p className={styles.header_msg}>Em caso de duvidas entre em contato com a administração da pagina.</p>
             <label className={styles.label_input}>
                 <span><FaEnvelope/> Email: </span>
                 <input type="email" placeholder='Email do administrador' value={email} onChange={(e) => setEmail(e.target.value)} />

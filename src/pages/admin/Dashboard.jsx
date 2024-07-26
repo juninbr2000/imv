@@ -17,13 +17,9 @@ const Dashboard = () => {
     const { deleteDocument, response } = useDeleteDocument("venda")
     const navigate = useNavigate();
 
-    console.log(venda)
 
     const handleDelete = (id, titulo, imagens) => {
       const apaga = window.confirm(`tem certeza que quer remover ${titulo}? essa ação nao podera ser desfeita.`)
-      console.log(id)
-      console.log(titulo)
-      console.log(imagens)
       if(apaga){
         deleteDocument(id, imagens)
       } else {
@@ -32,7 +28,6 @@ const Dashboard = () => {
     }
 
     const aVenda = venda ? venda.filter(imovel => imovel.venda) : [] 
-    console.log(aVenda)
     const ganhos = aVenda.reduce((total, imoveis) => {
       return total + (imoveis.valor * (5 / 100)) 
    }, 0) 
@@ -62,13 +57,20 @@ const Dashboard = () => {
             <button className={styles.button_add} onClick={() => navigate('/create')}>+ Imoveis</button>
           </div>
         </header>
-        <section>
+        <section className={styles.card_area}>
           {venda ? venda.map((casa) => <div key={casa.id} className={styles.card_container}>
-            {casa.imagens && casa.imagens.length > 0 ? <img src={casa.imagens[0]}/>: <FaCamera />}
+            {casa.imagens && casa.imagens.length > 0 ? <div className={styles.image_card}>
+                <img src={casa.imagens[0]} className={styles.img}/>
+              </div>
+            :
+              <div className={styles.image_card} >
+                <FaCamera />
+              </div>
+            }
             <Link to={`/${casa.id}`} className={styles.casa_info}>
               <h2>{casa.titulo}</h2>
               <div className='price'>
-                <h4>{casa.valor.toLocaleString("pt-br", {style: 'currency', currency: "BRL"})}</h4>
+                <h4 className={styles.h4}>{casa.valor.toLocaleString("pt-br", {style: 'currency', currency: "BRL"})}</h4>
                 {casa.aluguel && <p className='aluguel'>/Mes</p>}
               </div>
               {casa.endereco && <p>{casa.endereco}</p>}

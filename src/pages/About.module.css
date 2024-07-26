@@ -39,7 +39,8 @@
         flex-wrap: wrap;
         & li{
             border-bottom: 1px solid;
-            padding: 20px 10px;
+            padding: 60px 10px;
+            margin: 0;
             & .icons{
                 font-size: 30px;
                 background-color: #C5AD69;
@@ -115,15 +116,15 @@
         }
         & ul{
             flex-direction: row;
-            align-items: center;
             justify-content: space-around;
             & li{
-                width: 50%;
+                width: 30%;
                 border: none;
                 padding: 20px 30px;
             }
         }
-        & ul li:nth-child(2){
+        & ul li:nth-child(3),
+        ul li:nth-child(2){
             border-left: 1px solid;
         }
     }

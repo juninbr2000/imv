@@ -18,8 +18,8 @@ import EditDoc from "./pages/admin/EditDoc";
 import Footer from "./components/Footer";
 import Aboult from "./pages/Aboult";
 import NotFound from "./pages/NotFound";
-// import Inicio from "./pages/inicio";
-
+import CookieConset from "./components/CookieConset";
+import HomeBuild from "./pages/HomeBuild";
 
 function App() {
 
@@ -49,18 +49,19 @@ function App() {
 
   return (
     <>
+      <CookieConset />
       <AuthProvider value={{user}}>
       <BrowserRouter>
         <NavBar/>
         <Routes>
-          {/* <Route path="/" element={<Inicio/>} /> */}
+          <Route path="/" element={<HomeBuild/> } />
           <Route path="*" element={<NotFound />} />
-          <Route path="/home" element={!user ? <Login/> : <Home /> } />
-          <Route path="/:id" element={user ? <Casa /> : <Login/>} />
-          <Route path="/contato" element={user ? <Contacts /> : <Login/>} />
-          <Route path="/sobre" element={user ? <Aboult /> : <Login/>} />
+          <Route path="/home" element={!user ? <Login /> : <Home /> } />
+          <Route path="/:id" element={!user? <Login /> : <Casa />} />
+          <Route path="/contato" element={!user ? <Login/> : <Contacts />} />
+          <Route path="/sobre" element={!user ? <Login /> : <Aboult />} />
           <Route path="/dashboard" element={!user ? <Login/> : <Dashboard />} />
-          <Route path='/' element={!user ? <Login/> : <Navigate to="/home"/>}/>
+          <Route path='/admLogin' element={!user ? <Login/> : <Navigate to="/dashboard"/>}/>
           <Route path="/create" element={!user? <Login/> : <CreateDoc/>} />
           <Route path="/edit/:id" element={!user? <Login/> : <EditDoc/>} />
         </Routes>

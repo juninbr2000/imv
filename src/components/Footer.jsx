@@ -13,17 +13,18 @@ const Footer = () => {
             </svg>
             <div>
                 <h3>Luiza Messias Gentil</h3>
-                <p>Creci: MG ----- -</p>
+                <p>Creci: 0056928</p>
             </div>
         </div>
         <div className={styles.contact}>
             <Link to='/contato'>Contato <FaArrowRight/></Link>
             <Link to='/sobre'>Sobre Nós <FaArrowRight/></Link>
+            <Link to='https://wa.me/5535998990790'>Anuncie seu imóvel <FaArrowRight/></Link>
         </div>
         <div className={styles.social}>
             <h3>Nossas Redes Sociais:</h3>
             <Link to='*'><FaFacebook/></Link>
-            <Link to='*'><FaInstagram/></Link>
+            <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F'><FaInstagram/></Link>
             <Link to='*'><FaYoutube/></Link>
         </div>
         <h4 className={styles.copy}>Imoveis-Gentil ©2024</h4>
