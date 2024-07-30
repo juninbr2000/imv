@@ -78,8 +78,7 @@ const CreateDoc = () => {
       descricao,
       venda,
       aluguel,
-      area,
-      imageUrls
+      area
     }, imagens);
 
     navigate('/dashboard');
