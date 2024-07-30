@@ -50,7 +50,8 @@ const EditDoc = () => {
 
     const handleImageChange = (e) => {
         const selectedImages = Array.from(e.target.files);
-        setImagens([...imagens, ...selectedImages]);
+        const imageUrls = selectedImages.map(image => URL.createObjectURL(image));
+        setImagens([...imagens, ...imageUrls]);
     };
 
     const onDragEnd = (result) => {
@@ -187,6 +188,10 @@ const EditDoc = () => {
                 <label className={styles.text_area}>
                     <span>Descrição:</span>
                     <textarea value={descricao} name='descricao' onChange={(e) => setDescricao(e.target.value)} placeholder='Descreva o imóvel' ></textarea>
+                </label>
+                <label className={styles.image_inp}>
+                  <span>Imagens:</span>
+                  <input type="file" name='imagens' accept='image/*' multiple onChange={handleImageChange} />
                 </label>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable droppableId="imagens">
