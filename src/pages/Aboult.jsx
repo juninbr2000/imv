@@ -5,6 +5,9 @@ import { useNavigate, Link } from 'react-router-dom'
 
 const Aboult = () => {
   const navigate = useNavigate()
+
+  window.scrollTo(0, 0)
+
   return (
     <div>
         <div className={styles.card}>

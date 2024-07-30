@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storageService } from '../../firebase/config';
 import styles from './Form.module.css';
-
 import { useInsertDocument } from '../../hooks/useInsertDocuments';
 
 const CreateDoc = () => {
@@ -29,7 +29,7 @@ const CreateDoc = () => {
     setImagens(selectedImages);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (titulo === '') {
@@ -58,6 +58,14 @@ const CreateDoc = () => {
     const area = mtsqdd === '' ? 0 : parseFloat(mtsqdd);
     const preco = parseFloat(valor);
 
+    const uploadImage = async (image) => {
+      const imageRef = ref(storageService, `images/${image.name}`);
+      await uploadBytes(imageRef, image);
+      return await getDownloadURL(imageRef);
+    };
+
+    const imageUrls = await Promise.all(imagens.map(image => uploadImage(image)));
+
     insertDocument({
       titulo,
       valor: preco,
@@ -71,7 +79,8 @@ const CreateDoc = () => {
       venda,
       aluguel,
       area,
-    }, imagens);
+      imagens: imageUrls
+    });
 
     navigate('/dashboard');
   };
@@ -114,7 +123,6 @@ const CreateDoc = () => {
           <span>Endereço:</span>
           <input type="text" name='endereco' value={endereco} onChange={(e) => setEndereco(e.target.value)} placeholder='O endereço completo do imóvel' />
         </label>
-        
         <div className={styles.adicionais}>
           <div className={styles.adicional_input}>
             <label className={styles.label_input}>
@@ -126,7 +134,6 @@ const CreateDoc = () => {
               <input type="number" name='banheiros' value={banheiros} onChange={(e) => setBanheiros(e.target.value)} placeholder='Número de Banheiros' />
             </label>
           </div>
-
           <div className={styles.radio}>
             <label htmlFor="garagem">Garagem: </label>
             <div>
@@ -145,7 +152,7 @@ const CreateDoc = () => {
           <textarea value={descricao} name='descricao' onChange={(e) => setDescricao(e.target.value)} placeholder='Descreva o imóvel' ></textarea>
         </label>
         <label className={styles.image_inp}>
-          <span>Imagens: <p className={styles.erro}>As imagens não poderão ser alteradas após o envio</p></span>
+          <span>Imagens:</span>
           <input type="file" name='imagens' accept='image/*' multiple onChange={handleImageChange} />
         </label>
         <div className={styles.imageGrid}>

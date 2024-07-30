@@ -154,3 +154,33 @@
         width: 100%;
     }
 }
+
+
+/* Adicione isso ao seu arquivo Form.module.css */
+.imageGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.imageWrapper img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.imageWrapper button {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 2px 5px;
+    font-size: 12px;
+}

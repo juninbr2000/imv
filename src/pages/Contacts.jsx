@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import styles from './Contacts.module.css'
 
 const Contacts = () => {
+
+  window.scrollTo(0, 0)
+
   return (
     <div className={styles.contact_container}>
         <div>

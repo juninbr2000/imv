@@ -41,6 +41,10 @@ const Casa = () => {
       navigate('not-found')
     }
 
+    if(!loading){
+      window.scrollTo(0, 0)
+    }
+
   return (
     <div>
         {venda && <div className={styles.casa_container}>

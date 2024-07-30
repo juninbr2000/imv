@@ -22,6 +22,10 @@ const Home = () => {
         setCurrentPage(1); // Reset page to 1 on filter change
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [currentPage])
+
     if (loading) {
         return (
             <div className="spinner">

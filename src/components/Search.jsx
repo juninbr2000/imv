@@ -71,7 +71,7 @@ const Search = ({onFilterChange}) => {
             <label className={styles.select }>
                 <span><FaLocationArrow/> Localização</span>
                 <select name="bairro" onChange={(e) => setLocal(e.target.value)} value={local} >
-                    <option value="">Selecione um bairro</option>
+                    <option value="">Todas</option>
                     {bairros.map((bairro, index) => (
                         <option key={index} value={bairro}>{bairro}</option>
                     ))}
