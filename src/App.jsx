@@ -19,7 +19,6 @@ import Footer from "./components/Footer";
 import Aboult from "./pages/Aboult";
 import NotFound from "./pages/NotFound";
 import CookieConset from "./components/CookieConset";
-import HomeBuild from "./pages/HomeBuild";
 
 function App() {
 
@@ -54,12 +53,11 @@ function App() {
       <BrowserRouter>
         <NavBar/>
         <Routes>
-          <Route path="/" element={<HomeBuild/> } />
           <Route path="*" element={<NotFound />} />
-          <Route path="/home" element={!user ? <Login /> : <Home /> } />
-          <Route path="/:id" element={!user ? <Login /> : <Casa />} />
-          <Route path="/contato" element={!user ? <Login/> : <Contacts />} />
-          <Route path="/sobre" element={!user ? <Login /> : <Aboult />} />
+          <Route path="/" element={<Home /> } />
+          <Route path="/:id" element={<Casa />} />
+          <Route path="/contato" element={<Contacts />} />
+          <Route path="/sobre" element={<Aboult />} />
           <Route path="/dashboard" element={!user ? <Login/> : <Dashboard />} />
           <Route path='/admLogin' element={!user ? <Login/> : <Navigate to="/dashboard"/>}/>
           <Route path="/create" element={!user? <Login/> : <CreateDoc/>} />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaFacebook, FaInstagram, FaTiktok, FaYoutube, FaArrowRight } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaTelegram, FaYoutube, FaArrowRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import styles from './Footer.module.css'
 
@@ -20,12 +20,14 @@ const Footer = () => {
             <Link to='/contato'>Contato <FaArrowRight/></Link>
             <Link to='/sobre'>Sobre Nós <FaArrowRight/></Link>
             <Link to='https://wa.me/5535998990790'>Anuncie seu imóvel <FaArrowRight/></Link>
+            <p>Todas as imagens neste site foram postadas com autorização dos propietarios*</p>
         </div>
         <div className={styles.social}>
             <h3>Nossas Redes Sociais:</h3>
-            <Link to='*'><FaFacebook/></Link>
+            <Link to='/' style={{cursor: "not-allowed"}}><FaFacebook/></Link>
             <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F'><FaInstagram/></Link>
-            <Link to='*'><FaYoutube/></Link>
+            <Link to='/' style={{cursor: "not-allowed"}}><FaYoutube/></Link>
+            <Link to='https://t.me/Imoveisgentil' target='_blank'><FaTelegram/></Link>
         </div>
         <h4 className={styles.copy}>Imoveis-Gentil ©2024</h4>
         <div className={styles.credit}>

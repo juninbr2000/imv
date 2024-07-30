@@ -3,6 +3,7 @@ import Search from '../components/Search';
 import { useFetchDocuments } from '../hooks/useFetchDocuments';
 import Card from '../components/Card';
 import { FaPlus } from 'react-icons/fa';
+import { Analytics } from "@vercel/analytics/react"
 
 const Home = () => {
     const [aluguel, setAluguel] = useState(false);
@@ -76,6 +77,7 @@ const Home = () => {
                     ))}
                 </div>
             </section>
+            <Analytics />
         </div>
     );
 }

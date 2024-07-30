@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie'
 import styles from './CookieConcet.module.css'
 
 const CookieConset = () => {
-    const [isVisible, setIsVisible] = useState('false');
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(( ) => { 
-        const cookeisAccepted = localStorage.getItem('cookiesAccepted');
-        if(!cookeisAccepted){
+        const cookiesAccepted = Cookies.get('cookiesAccepted');
+        if(!cookiesAccepted){
             setIsVisible(true)
         }
     }, [])
 
     const acceptCookies = () => {
-        localStorage.setItem('cookiesAccepted', 'true')
+        Cookies.set('cookiesAccepted', 'true', {expires: 30})
         setIsVisible(false)
     }
 

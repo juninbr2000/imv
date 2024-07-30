@@ -254,24 +254,3 @@
   }
 
 }
-
-
-
-.advice{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 0 30px;
-  justify-content: center;
-  max-width: 1024px;
-  margin: 0 auto;
-  min-height: 60vh;
-  font-size: 10px;
-  gap: 30px;
-}
-@media screen and (min-width: 1024px) {
-  .advice{
-    display: flex;
-    flex-direction: row;
-  }  
-}
