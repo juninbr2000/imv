@@ -4,7 +4,7 @@ import { useAuthValue } from '../../context/AuthContext';
 import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 import { useFetchDocument } from "../../hooks/useFetchDocument";
 import styles from './Form.module.css';
-import { ref, deleteObject, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storageService } from "../../firebase/config";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -26,8 +26,7 @@ const EditDoc = () => {
     const [aluguel, setAluguel] = useState(false);
     const [mtsqdd, setMtsqdd] = useState('');
 
-    const { user } = useAuthValue();
-    const { updateDocument, response } = useUpdateDocument("venda");
+    const { updateDocument } = useUpdateDocument("venda");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,21 +49,19 @@ const EditDoc = () => {
 
     const handleImageChange = (e) => {
         const selectedImages = Array.from(e.target.files);
-        const imageUrls = selectedImages.map(image => URL.createObjectURL(image));
-        setImagens([...imagens, ...imageUrls]);
+        setImagens(prevImages => [...prevImages, ...selectedImages]); // Armazena os arquivos de imagem
     };
 
     const onDragEnd = (result) => {
-      if(!result.destination){
-        return 
-      }
+        if (!result.destination) {
+            return;
+        }
 
-      const newImages = Array.from(imagens)
-      const [removed] = newImages.splice(result.source.index, 1)
-      newImages.splice(result.destination.index, 0, removed);
-
-      setImagens(newImages)
-    }
+        const newImages = Array.from(imagens);
+        const [removed] = newImages.splice(result.source.index, 1);
+        newImages.splice(result.destination.index, 0, removed);
+        setImagens(newImages);
+    };
 
     const handleRemoveImage = (index) => {
         const newImages = [...imagens];
@@ -74,7 +71,7 @@ const EditDoc = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (titulo === '') {
             setFormError('O título precisa ser preenchido');
             return;
@@ -82,34 +79,40 @@ const EditDoc = () => {
             setFormError('O título é muito curto');
             return;
         }
-
+    
         if (valor < 10) {
             setFormError('O valor está preenchido de forma errada');
             return;
         }
-
+    
         if (local === '') {
             setFormError('O local precisa ser preenchido');
             return;
         }
-
+    
         if (mtsqdd !== '' && Number.isNaN(parseFloat(mtsqdd))) {
             setFormError('Área foi preenchida de forma incorreta');
             return;
         }
-
+    
         const area = mtsqdd === '' ? 0 : parseFloat(mtsqdd);
         const preco = parseFloat(valor);
-
+    
         const uploadImage = async (image) => {
             const imageRef = ref(storageService, `imagens/${image.name}`);
             await uploadBytes(imageRef, image);
             return await getDownloadURL(imageRef);
         };
-
-        const imageUrls = await Promise.all(imagens.filter(image => typeof image !== 'string').map(image => uploadImage(image)));
+    
+        // Filtrar apenas as imagens novas (as que são do tipo File)
+        const newImageUrls = await Promise.all(
+            imagens.filter(image => image instanceof File).map(image => uploadImage(image))
+        );
+    
+        // Filtrar apenas as URLs existentes (as que não são do tipo File)
         const existingImageUrls = imagens.filter(image => typeof image === 'string');
-
+    
+        // Atualizar o documento com as URLs corretas
         await updateDocument(id, {
             titulo,
             valor: preco,
@@ -123,11 +126,12 @@ const EditDoc = () => {
             venda,
             aluguel,
             area,
-            imagens: [...existingImageUrls, ...imageUrls]
+            imagens: [...existingImageUrls, ...newImageUrls]
         });
-
+    
         navigate('/dashboard');
     };
+    
 
     return (
         <div className={styles.form_container}>
@@ -187,11 +191,11 @@ const EditDoc = () => {
                 </div>
                 <label className={styles.text_area}>
                     <span>Descrição:</span>
-                    <textarea value={descricao} name='descricao' onChange={(e) => setDescricao(e.target.value)} placeholder='Descreva o imóvel' ></textarea>
+                    <textarea value={descricao} name='descricao' onChange={(e) => setDescricao(e.target.value)} placeholder='Descreva o imóvel'></textarea>
                 </label>
                 <label className={styles.image_inp}>
-                  <span>Imagens:</span>
-                  <input type="file" name='imagens' accept='image/*' multiple onChange={handleImageChange} />
+                    <span>Imagens:</span>
+                    <input type="file" name='imagens' accept='image/*' multiple onChange={handleImageChange} />
                 </label>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable droppableId="imagens">
@@ -201,25 +205,23 @@ const EditDoc = () => {
                           <Draggable key={index} draggableId={`imagem-${index}`} index={index}>
                             {(provided) => (
                               <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={styles.imageWrapper}>
-                                <img src={imagem} alt={`imagem ${index}`} />
-                                <button type="button" onClick={() => handleRemoveImage(index)}>Remover</button>
-                              </div>
+                                {imagem instanceof File ? (
+                                  <img src={URL.createObjectURL(imagem)} alt={`imagem ${index}`} />
+                                ) : (
+                                  <img src={imagem} alt={`imagem ${index}`} />
+                                )}
+                              <button type="button" onClick={() => handleRemoveImage(index)}>Remover</button>
+                            </div>
                             )}
                           </Draggable>
                         ))}
-                        {provided.placeholder}
+                      {provided.placeholder}
                       </div>
-                    )}
-                  </Droppable>
+                     )}
+                    </Droppable>
                 </DragDropContext>
-                {formError === '' ? (
-                    <button type='submit' className='primary_btn'>Salvar Alterações</button>
-                ) : (
-                    <div>
-                        <p className='error'>{formError}</p>
-                        <button type='submit' className='primary_btn' disabled>Salvar Alterações</button>
-                    </div>
-                )}
+                {formError && <p className={styles.error}>{formError}</p>}
+                <button type="submit" className='primary_btn'>Salvar</button>
             </form>
         </div>
     );

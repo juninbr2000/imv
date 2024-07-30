@@ -59,7 +59,7 @@ const CreateDoc = () => {
     const preco = parseFloat(valor);
 
     const uploadImage = async (image) => {
-      const imageRef = ref(storageService, `images/${image.name}`);
+      const imageRef = ref(storageService, `imagens/${image.name}`);
       await uploadBytes(imageRef, image);
       return await getDownloadURL(imageRef);
     };
@@ -79,8 +79,8 @@ const CreateDoc = () => {
       venda,
       aluguel,
       area,
-      imagens: imageUrls
-    });
+      imageUrls
+    }, imagens);
 
     navigate('/dashboard');
   };
