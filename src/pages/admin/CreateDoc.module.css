@@ -188,18 +188,4 @@
         border-radius: 5px;
     }
 }
-.imageWrapper{
-    position: relative;
-    z-index: 1;
-}
-.imageWrapper button{
-    background-color: red;
-    border: none;
-    padding: 3px;
-    width: 100%;
-    color: #fefefe;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 0 0 5px 5px;
-}
+ 
