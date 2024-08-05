@@ -74,7 +74,7 @@ const Dashboard = () => {
                 {casa.aluguel && <p className='aluguel'>/Mes</p>}
               </div>
               {casa.endereco && <p>{casa.endereco}</p>}
-              <p>ID: {casa.id}</p>
+              <p className={styles.id}>ID: {casa.id}</p>
             </Link>
             <div className={styles.buttons_area}>
               <button className={styles.edit_btn} onClick={() => navigate(`/edit/${casa.id}`)}><FaPenAlt /></button>

@@ -124,7 +124,9 @@
   .delete_btn:hover {
     color: #dc3545;
   }
-  
+  .id{
+    font-size: .5em;
+  }
   
 .add{
     width: 100%;
