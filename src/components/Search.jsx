@@ -157,7 +157,7 @@ const Search = ({onFilterChange}) => {
                     <label className={styles.select}>
                         <span><BiMoney/> Valor</span>
                         <select name="valor" onChange={(e) => setMaxCost(e.target.value)}>
-                            <option value="">qualquer</option>
+                            <option value="">Qualquer</option>
                             {isSale === true && saleValue.map((preco, index) => (
                                 <option key={index} value={preco.value}>{preco.text}</option>
                             ))}
