@@ -57,6 +57,8 @@ const CreateDoc = () => {
       return;
     }
 
+    setStep(5)
+
     const area = mtsqdd === '' ? 0 : parseFloat(mtsqdd);
     const preco = parseFloat(valor);
 
@@ -82,7 +84,6 @@ const CreateDoc = () => {
       aluguel,
       area,
       tipo,
-      imageUrls
     }, imagens);
 
     navigate('/dashboard');
@@ -246,6 +247,19 @@ const CreateDoc = () => {
           </div>
         )}
         {formError && <p className='error'>{formError}</p>}
+        {step === 5 && (
+          <div className={styles.steps}>
+            <div className={styles.formStep}>
+              <span className={styles.complete}></span>
+              <span className={styles.complete}></span>
+              <span className={styles.complete}></span>
+              <span className={styles.complete}></span>
+            </div>
+            <h2>Aguarde enquanto os dados são enviados...</h2>
+            <p>você será redirecionado automaticamente após o envio</p>
+          </div>
+
+        )}
       </form>
     </div>
   );

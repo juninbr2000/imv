@@ -1,0 +1,31 @@
+.form_container{
+    min-height: 50vh;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #d1d1d1;
+    min-width: 80vw;
+    max-width: 500px;
+    padding: 40px 15px;
+    & button{
+        align-self: flex-end;
+    }
+}
+.header_msg{
+    text-align: center;
+    color: #555;
+}
+.label_input{
+    display: flex;
+    flex-direction: column;
+    & span{
+        color: #192436;
+    }
+    & input{
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+}
