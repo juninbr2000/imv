@@ -105,7 +105,8 @@ const EditDoc = () => {
     const preco = parseFloat(valor);
 
     const uploadImage = async (image) => {
-      const imageRef = ref(storageService, `imagens/${image.name}`);
+      const timeStamp = Date.now()
+      const imageRef = ref(storageService, `imagens/${timeStamp}-${image.name}`);
       await uploadBytes(imageRef, image);
       return await getDownloadURL(imageRef);
     };

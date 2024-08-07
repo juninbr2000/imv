@@ -20,7 +20,7 @@ const Footer = () => {
             <Link to='/contato'>Contato <FaArrowRight/></Link>
             <Link to='/sobre'>Sobre Nós <FaArrowRight/></Link>
             <Link to='https://wa.me/5535998990790'>Anuncie seu imóvel <FaArrowRight/></Link>
-            <p>Todas as imagens neste site foram postadas com autorização dos propietarios*</p>
+            <p>Todas as imagens neste site foram postadas com autorização dos proprietarios*</p>
         </div>
         <div className={styles.social}>
             <h3>Nossas Redes Sociais:</h3>
