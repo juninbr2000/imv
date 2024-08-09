@@ -15,14 +15,14 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
 
-    const { documents: venda, loading } = useFetchDocuments("venda", aluguel, location, sale, tipo, cost);
+    const { documents: venda, loading } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost));
 
     const handleFilterChange = (isAluguel, selectedLocation, isSale, tipoImv, maxCost) => {
         setAluguel(isAluguel);
         setLocation(selectedLocation);
         setSale(isSale);
         setTipo(tipoImv);
-        setCost(parseFloat(maxCost));
+        setCost((maxCost));
         setCurrentPage(1); // Reset page to 1 on filter change
     };
 
@@ -64,7 +64,7 @@ const Home = () => {
                     {aluguel === true && <p className='filter' onClick={() => setAluguel(false)}>Aluguel <FaPlus/></p>}
                     {location !== '' && <p className='filter' onClick={() => setLocation("")}> {location} <FaPlus/></p>}
                     {tipo !== '' && <p className='filter' onClick={() => setLocation("")}> {tipo} <FaPlus/></p>}
-                    {cost !== '' && <p className='filter' onClick={() => setCost('')}>Valor: até {cost.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} <FaPlus/></p>}
+                    {cost !== '' && <p className='filter' onClick={() => setCost('')}>Até {parseFloat(cost).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} <FaPlus/></p>}
                 </div>
                 <div className='card-area'>
                     {currentItems.length > 0 ? currentItems.map((casa) => <Card key={casa.id} venda={casa} />) : <h4>Nenhum imóvel correspondente à sua busca foi encontrado</h4>}
