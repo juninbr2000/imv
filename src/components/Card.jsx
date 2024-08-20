@@ -1,6 +1,7 @@
-import React from 'react'
-import { FaCarAlt, FaCamera, FaHome, FaWater, FaPlus, FaBed, FaShower } from "react-icons/fa"
+import React, { useState } from 'react'
+import { FaCamera, FaCar, FaWater, FaCouch, FaBed, FaShower, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaPlus } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
+import { BiSolidWasher } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Card.module.css'
 
@@ -12,6 +13,22 @@ const Card = ({ venda }) => {
   const s = date.getTime()
   const tresdias = 259200000
   const navigate = useNavigate()
+  const caracteristicas = venda.caracteristicas || []
+
+  const iconMap = {
+    FaBed: <FaBed/>,
+    FaShower: <FaShower/>,
+    FaTv: <FaTv/>,
+    FaGlassMartini: <FaGlassMartini/>,
+    FaUtensils: <FaUtensils/>,
+    FaUmbrellaBeach: <FaUmbrellaBeach/>,
+    BiSolidWasher: <BiSolidWasher/>,
+    FaWater: <FaWater/>,
+    FaCar: <FaCar/>,
+    FaCouch: <FaCouch/>,
+    FaTree: <FaTree/>,
+  }
+  
   return (
     <div className={styles.card_container} onClick={() => navigate(`/${venda.id}`)}>
         <div className={styles.card_images}>
@@ -24,6 +41,12 @@ const Card = ({ venda }) => {
             {venda.aluguel && <p className='aluguel'>/Mês</p>}
           </div>
             <h3>{venda.titulo}</h3>
+            {venda && caracteristicas.length > 0 ? <div className={styles.fast_inf}>
+              {caracteristicas.filter(itens => itens.ativado === 'true').slice(0, 4).map(item => (
+                <p key={item.id}>{iconMap[item.icon]} {item.quantidade} {item.name}</p>
+              ))}
+            </div>
+            :
             <div className={styles.fast_info}>
               <div>
                 {venda.quartos > 0 && <p><FaBed/> {venda.quartos} Quartos</p>}
@@ -31,10 +54,10 @@ const Card = ({ venda }) => {
                 {venda.area > 0 && (venda.quartos === 0 || venda.banheiros === 0) && <p><BsArrowsAngleExpand/> {venda.area} m²</p>}
               </div>
               <div>
-                {venda.garagem && <p><FaCarAlt/> Garagem</p>}
+                {venda.garagem && <p><FaCar/> Garagem</p>}
                 {venda.piscina && <p><FaWater/> Piscina</p>}
               </div>
-            </div>
+            </div>}
             
         </div>
         <div className={styles.button_area}>

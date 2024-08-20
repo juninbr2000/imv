@@ -76,6 +76,8 @@ const Search = ({onFilterChange}) => {
                 const allTypes = querySnapshot.docs.map(doc => doc.data().tipo)
                 const uniqueTypes = [...new Set(allTypes)];
 
+                uniqueBairros.sort((a, b) => a.localeCompare(b, 'pt-br', {sensitivity: 'base'}))
+
                 setBairros(uniqueBairros);
                 setTipos(uniqueTypes);
             } catch (error) {

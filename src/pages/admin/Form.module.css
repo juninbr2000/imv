@@ -203,3 +203,49 @@
     left: 0;
     border-radius: 0 0 5px 5px;
 }
+.cont_inp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+  
+ /* Estilização de cada item de característica */
+ .caracteristicaItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Checkbox e label para cada característica */
+  .caracteristicaItem label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Input para quantidade */
+  .quantidadeInput {
+    width: 60px;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #555;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #fff;
+}
+@media screen and (min-width: 820px){
+    .caracteristicaItem{
+        width: 30%;
+    }
+}

@@ -5,25 +5,41 @@ import { storageService } from '../../firebase/config';
 import styles from './CreateDoc.module.css';
 import { useInsertDocument } from '../../hooks/useInsertDocuments';
 
+
 const CreateDoc = () => {
   const [imagens, setImagens] = useState([]);
   const [titulo, setTitulo] = useState('');
   const [valor, setValor] = useState('');
   const [local, setLocal] = useState('');
   const [endereco, setEndereco] = useState('');
-  const [quartos, setQuartos] = useState(0);
-  const [banheiros, setBanheiros] = useState(0);
-  const [garagem, setGaragem] = useState(false);
-  const [piscina, setPiscina] = useState(false);
+  // const [quartos, setQuartos] = useState(0);
+  // const [banheiros, setBanheiros] = useState(0);
+  // const [garagem, setGaragem] = useState(false);
+  // const [piscina, setPiscina] = useState(false);
   const [descricao, setDescricao] = useState('');
   const [formError, setFormError] = useState('');
   const [venda, setVenda] = useState(true);
   const [aluguel, setAluguel] = useState(false);
+  const [real, setReal] = useState('')
   const [mtsqdd, setMtsqdd] = useState('');
   const [tipo, setTipo] = useState('');
   const [step, setStep] = useState(1);
+  const [caracteristicas, setCaracteristicas] = useState([
+    {id: 1, name: 'Quartos', quantidade: 0, ativado: 'false', icon: 'FaBed'},
+    {id: 2, name: 'Garagem', ativado: 'false', icon: 'FaCar' },
+    {id: 3, name: 'Piscina', ativado: 'false', icon: 'FaWater'},
+    {id: 4, name: 'Banheiros', quantidade: 0, ativado: 'false', icon: 'FaShower'},
+    {id: 5, name: 'Suite', quantidade: 0, ativado: 'false', icon: 'FaBed'},
+    {id: 6, name: 'Sala de Estar', quantidade: 0, ativado: 'false', icon: 'FaTv'},
+    {id: 7, name: 'Sala de Jantar', quantidade: 0, ativado: 'false', icon: 'FaGlassMartini'},
+    {id: 8, name: 'Cozinha', quantidade: 0, ativado: 'false', icon: 'FaUtensils'},
+    {id: 9, name: 'Area de Lazer', ativado: 'false', icon: 'FaUmbrellaBeach'},
+    {id: 10, name: 'Area de Serviço', ativado: 'false', icon: 'BiSolidWasher'},
+    {id: 11, name: 'Mobiliada', ativado: 'false', icon: 'FaCouch'},
+    {id: 12, name: 'Jardim', ativado: 'false', icon: 'FaTree'},
+  ])
 
-  const { insertDocument, response } = useInsertDocument('venda');
+  const { insertDocument, response } = useInsertDocument('venda') 
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -60,7 +76,6 @@ const CreateDoc = () => {
     setStep(5)
 
     const area = mtsqdd === '' ? 0 : parseFloat(mtsqdd);
-    const preco = parseFloat(valor);
 
     const uploadImage = async (image) => {
       const timeStamp = Date.now()
@@ -73,18 +88,19 @@ const CreateDoc = () => {
 
     insertDocument({
       titulo,
-      valor: preco,
+      valor,
       local,
       endereco,
-      quartos,
-      banheiros,
-      garagem,
-      piscina,
+      // quartos,
+      // banheiros,
+      // garagem,
+      // piscina,
       descricao,
       venda,
       aluguel,
       area,
       tipo,
+      caracteristicas
     }, imagens);
 
     navigate('/dashboard');
@@ -146,11 +162,19 @@ const CreateDoc = () => {
               <span></span>
               <span></span>
             </div>
-            <h2>Agora informe o Valor</h2>
+            <h2>Agora informe o Valor e o Local</h2>
             <div className={styles.camp_form}>
               <label className={styles.label_input}>
-                <span>Valor:*</span>
-                <input type="number" name='valor' value={valor} onChange={(e) => setValor(e.target.value)} placeholder='Valor do imóvel (,00 não precisa ser inserido)' />
+                <span>Valor:* </span>
+                <input type="text" name='valor' value={real} onChange={(e) => {
+                  let value = e.target.value
+                  value = value.replace(/\D/g, '')
+                  const numberValue = parseFloat(value)/100;
+                  const formatValue = numberValue.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+                  setValor(numberValue)
+                  setReal(formatValue)
+                  }}
+                  placeholder='Valor do imóvel' />
               </label>
               <div className={styles.radio}>
                 <label>
@@ -166,23 +190,6 @@ const CreateDoc = () => {
                   }} checked={aluguel} /> Aluguel
                 </label>
               </div>
-            </div>
-            <div className={styles.buttons}>
-              <button type="button" onClick={handlePrevStep} className={styles.prevStep}>&lt; Voltar</button>
-              <button type="button" onClick={handleNextStep} className={styles.nextStep}>Continuar &gt;</button>
-            </div>
-          </div>
-        )}
-        {step === 3 && (
-          <div className={styles.steps}>
-            <div className={styles.formStep}>
-              <span className={styles.complete}></span>
-              <span className={styles.complete}></span>
-              <span className={styles.active}></span>
-              <span></span>
-            </div>
-            <h2>Agora informe o Local e Detalhes</h2>
-            <div className={styles.camp_form}>
               <label className={styles.label_input}>
                 <span>Local:</span>
                 <input type="text" name='local' value={local} onChange={(e) => setLocal(e.target.value)} placeholder='Apenas o bairro ou área do imóvel (usado para o filtro de pesquisa)' />
@@ -191,37 +198,62 @@ const CreateDoc = () => {
                 <span>Endereço:</span>
                 <input type="text" name='endereco' value={endereco} onChange={(e) => setEndereco(e.target.value)} placeholder='O endereço completo do imóvel' />
               </label>
-              <div className={styles.cont_inp}>
-                <div className={styles.imp_add}>
-                  <label className={styles.meio}>
-                    <span>Quartos:</span>
-                    <input type="number" name='quartos' value={quartos} onChange={(e) => setQuartos(e.target.value)} placeholder='Número de Quartos' />
-                  </label>
-                  <label className={styles.meio}>
-                    <span>Banheiros:</span>
-                    <input type="number" name='banheiros' value={banheiros} onChange={(e) => setBanheiros(e.target.value)} placeholder='Número de Banheiros' />
-                  </label>
-                </div>
-                <div className={styles.radio}>
-                  <label htmlFor="garagem">Garagem: </label>
-                  <div className={styles.radio_cont}>
-                    <input type="radio" name='garagem' onChange={() => setGaragem(true)} checked={garagem} /> Sim
-                    <input type="radio" name='garagem' onChange={() => setGaragem(false)} checked={!garagem} /> Não
-                  </div>
-                  <label htmlFor="piscina">Piscina: </label>
-                  <div className={styles.radio_cont}>
-                    <input type="radio" name='piscina' onChange={() => setPiscina(true)} checked={piscina} /> Sim
-                    <input type="radio" name='piscina' onChange={() => setPiscina(false)} checked={!piscina} /> Não
-                  </div>
-                </div>
-              </div>
             </div>
             <div className={styles.buttons}>
               <button type="button" onClick={handlePrevStep} className={styles.prevStep}>&lt; Voltar</button>
               <button type="button" onClick={handleNextStep} className={styles.nextStep}>Continuar &gt;</button>
             </div>
-          </div>  
+          </div>
         )}
+        {step === 3 && (
+  <div className={styles.steps}>
+    <div className={styles.formStep}>
+      <span className={styles.complete}></span>
+      <span className={styles.complete}></span>
+      <span className={styles.active}></span>
+      <span></span>
+    </div>
+    <h2>Agora informe os Detalhes</h2>
+    <div className={styles.camp_form}>
+      <div className={styles.cont_inp}>
+        {caracteristicas.map((caracteristica, index) => (
+          <div key={caracteristica.id} className={styles.caracteristicaItem}>
+            <label>
+              <input
+                type="checkbox"
+                checked={caracteristica.ativado === 'true'}
+                onChange={(e) => {
+                  const newCaracteristicas = [...caracteristicas];
+                  newCaracteristicas[index].ativado = e.target.checked ? 'true' : 'false';
+                  setCaracteristicas(newCaracteristicas);
+                }}
+              />
+              {caracteristica.name}
+            </label>
+            {caracteristica.quantidade !== undefined && caracteristica.ativado === 'true' && (
+              <input
+                type="number"
+                value={caracteristica.quantidade}
+                min="0"
+                onChange={(e) => {
+                  const newCaracteristicas = [...caracteristicas];
+                  newCaracteristicas[index].quantidade = e.target.value;
+                  setCaracteristicas(newCaracteristicas);
+                }}
+                className={styles.quantidadeInput}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className={styles.buttons}>
+      <button type="button" onClick={handlePrevStep} className={styles.prevStep}>&lt; Voltar</button>
+      <button type="button" onClick={handleNextStep} className={styles.nextStep}>Continuar &gt;</button>
+    </div>
+  </div>
+)}
+
         {step === 4 && (
           <div className={styles.steps}>
             <div className={styles.formStep}>

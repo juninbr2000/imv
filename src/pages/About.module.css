@@ -41,6 +41,7 @@
             border-bottom: 1px solid;
             padding: 60px 10px;
             margin: 0;
+            
             & .icons{
                 font-size: 30px;
                 background-color: #C5AD69;
@@ -117,15 +118,15 @@
         & ul{
             flex-direction: row;
             justify-content: space-around;
+            gap: 5%;
+            width: 100%;
+            
             & li{
-                width: 30%;
+                width: 40%;
                 border: none;
+                margin-top: 30px;
                 padding: 20px 30px;
             }
-        }
-        & ul li:nth-child(3),
-        ul li:nth-child(2){
-            border-left: 1px solid;
         }
     }
     .contacts{

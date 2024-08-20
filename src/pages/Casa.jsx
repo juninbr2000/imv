@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useFetchDocument } from '../hooks/useFetchDocument';
 
-import { FaCamera, FaCarAlt, FaWater, FaHome, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaCamera, FaCar, FaWater, FaCouch, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
+import { BiSolidWasher } from 'react-icons/bi'
 
 import styles from './Casa.module.css'
 import WhatsappBtn from '../components/WhatsappBtn';
@@ -16,6 +17,26 @@ const Casa = () => {
     const [i, setI]= useState(0)
     const [currentIndex, setCurrentIndex] = useState(0)
     const navigate = useNavigate()
+    const [carac, setCarac] = useState([])
+    const iconMap = {
+      FaBed: <FaBed/>,
+      FaShower: <FaShower/>,
+      FaTv: <FaTv/>,
+      FaGlassMartini: <FaGlassMartini/>,
+      FaUtensils: <FaUtensils/>,
+      FaUmbrellaBeach: <FaUmbrellaBeach/>,
+      BiSolidWasher: <BiSolidWasher/>,
+      FaWater: <FaWater/>,
+      FaCar: <FaCar/>,
+      FaCouch: <FaCouch/>,
+      FaTree: <FaTree/>,
+    }
+
+    useEffect(() => {
+      if(venda){
+        setCarac(venda.caracteristicas || [])
+      }
+    }, [venda])
 
     if(loading){
         return <div className="spinner">
@@ -76,6 +97,14 @@ const Casa = () => {
               <path d="M9 9.75C10.2426 9.75 11.25 8.74264 11.25 7.5C11.25 6.25736 10.2426 5.25 9 5.25C7.75736 5.25 6.75 6.25736 6.75 7.5C6.75 8.74264 7.75736 9.75 9 9.75Z" stroke="#818181" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg> Endereço indisponivel</p>}
             
+            {venda.caracteristicas !== undefined ? <div className={styles.caracteristicasCont}>
+              {carac.filter(itens => itens.ativado === 'true').map(item => (
+                <div key={item.id} className={styles.itens}>
+                  <p>{iconMap[item.icon]} {item.quantidade} {item.name}</p>
+                </div>
+              ))}
+            </div>
+            :
             <div className={styles.fast_info}>
               <div>
                 {venda.quartos > 0 && <p><FaBed/> {venda.quartos} Quartos</p>}
@@ -84,12 +113,17 @@ const Casa = () => {
               </div>
               <div>
                 {venda.piscina && <p><FaWater/> Piscina</p>}
-                {venda.garagem ? <p><FaCarAlt/> Garagem</p> : ''}
+                {venda.garagem ? <p><FaCar/> Garagem</p> : ''}
               </div>
-            </div>
+            </div>}
             {venda.descricao && venda.descricao !== "" && <>
             <h2 className={styles.title}>Descrição</h2>
-            <p className={styles.description}>{venda.descricao}</p>
+            {venda.descricao.split('\n').map((line, index) => (
+              <p key={index} className={styles.description}>
+                {line}
+                <br/>
+              </p>
+            )) }
             </>}
             <h4>Agende já uma visita!</h4>
           </div>

@@ -13,7 +13,7 @@ const Home = () => {
     const [cost, setCost] = useState('')
 
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 9;
+    const itemsPerPage = 12;
 
     const { documents: venda, loading } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost));
 
