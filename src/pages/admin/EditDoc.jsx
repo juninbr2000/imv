@@ -5,6 +5,7 @@ import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 import styles from './Form.module.css';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storageService } from '../../firebase/config';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const EditDoc = () => {
   const { id } = useParams();
@@ -55,6 +56,20 @@ const EditDoc = () => {
       ]);
     }
   }, [casa]);
+
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+    const newImages = Array.from(imagens);
+    const [removed] = newImages.splice(result.source.index, 1);
+    newImages.splice(result.destination.index, 0, removed);
+    setImagens(newImages);
+  };
+
+  const handleRemoveImage = (index) => {
+    const newImages = [...imagens];
+    newImages.splice(index, 1);
+    setImagens(newImages);
+  };
 
   const handleImageChange = (e) => {
     const selectedImages = Array.from(e.target.files);
@@ -300,17 +315,36 @@ const EditDoc = () => {
               <span>Imagens:</span>
               <input type="file" name="imagens" accept="image/*" multiple onChange={handleImageChange} />
             </label>
-            <div className={styles.imageGrid}>
-              {imagens.map((imagem, index) => (
-                <div key={index} className={styles.imageWrapper}>
-                  {typeof imagem === 'string' ? (
-                    <img src={imagem} alt={`Imagem ${index + 1}`} className={styles.image} />
-                  ) : (
-                    <img src={URL.createObjectURL(imagem)} alt={`Imagem ${index + 1}`} className={styles.image} />
-                  )}
-                </div>
-              ))}
-            </div>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="imagens">
+                {(provided) => (
+                  <div className={styles.imageGrid} {...provided.droppableProps} ref={provided.innerRef}>
+                    {imagens.map((imagem, index) => (
+                      <Draggable key={index} draggableId={`imagem-${index}`} index={index}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className={styles.imageWrapper}
+                          >
+                            {imagem instanceof File ? (
+                              <img src={URL.createObjectURL(imagem)} alt={`imagem ${index}`} />
+                            ) : (
+                              <img src={imagem} alt={`imagem ${index}`} />
+                            )}
+                            <button type="button" onClick={() => handleRemoveImage(index)}>
+                              Remover
+                            </button>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
             {formError && <p className={styles.error}>{formError}</p>}
             <div className={styles.buttons}>
               <button type="button" onClick={handlePrevStep} className={styles.prevStep}>
