@@ -35,6 +35,10 @@ const Casa = () => {
     useEffect(() => {
       if(venda){
         setCarac(venda.caracteristicas || [])
+        document.title = `${venda.titulo} | Imóveis Gentil`
+        return () => {
+          document.title = 'Imóveis Gentil | Lambari MG';
+        };
       }
     }, [venda])
 
