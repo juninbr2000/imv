@@ -36,6 +36,7 @@ const Casa = () => {
       if(venda){
         setCarac(venda.caracteristicas || [])
         document.title = `${venda.titulo} | Imóveis Gentil`
+        console.log(venda)
         return () => {
           document.title = 'Imóveis Gentil | Lambari MG';
         };
@@ -107,6 +108,7 @@ const Casa = () => {
                   <p>{iconMap[item.icon]} {item.quantidade} {item.name}</p>
                 </div>
               ))}
+                {venda.area > 0 && <p style={{textAlign: 'center', width: '100%', marginTop: '20px'}}><BsArrowsAngleExpand/>Area: {venda.area}m²</p>}           
             </div>
             :
             <div className={styles.fast_info}>

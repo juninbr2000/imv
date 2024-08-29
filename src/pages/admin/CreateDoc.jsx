@@ -192,7 +192,73 @@ const CreateDoc = () => {
               </div>
               <label className={styles.label_input}>
                 <span>Local:</span>
-                <input type="text" name='local' value={local} onChange={(e) => setLocal(e.target.value)} placeholder='Apenas o bairro ou área do imóvel (usado para o filtro de pesquisa)' />
+                <select value={local} onChange={(e) => setLocal(e.target.value)}>
+                  <optgroup label='NÃO ESPECIFICAR'>
+                      <option value="">Lambari MG</option>
+                  </optgroup>
+                  <optgroup label="ZONA SUL">
+                      <option value="Volta do Lago">Volta do Lago</option>
+                      <option value="Santana">Santana</option>
+                      <option value="Lot. Nova Lambari">Lot. Nova Lambari</option>
+                      <option value="Corte de Pedra">Corte de Pedra</option>
+                      <option value="Jardim do Lago">Jardim do Lago</option>
+                      <option value="Lake City">Lake City</option>
+                      <option value="Lake City II">Lake City II</option>
+                      <option value="Galo Branco">Galo Branco</option>
+                      <option value="Galo de Ouro">Galo de Ouro</option>
+                      <option value="Vale do Sol">Vale do Sol</option>
+                      <option value="Pinhão Roxo">Pinhão Roxo</option>
+                  </optgroup>
+                  <optgroup label="ZONA LESTE">
+                      <option value="Volta do Ó">Volta do Ó</option>
+                      <option value="Vila Campos">Vila Campos</option>
+                      <option value="Novo Horizonte">Novo Horizonte</option>
+                      <option value="Campo Belo">Campo Belo</option>
+                      <option value="Bairro Colina">Bairro Colina</option>
+                      <option value="Vila Brasil">Vila Brasil</option>
+                      <option value="Matadouro">Matadouro</option>
+                  </optgroup>
+                  <optgroup label="ZONA NORTE">
+                      <option value="Campinho">Campinho</option>
+                      <option value="Recanto da Serra">Recanto da Serra</option>
+                      <option value="Pitangueiras">Pitangueiras</option>
+                      <option value="Jardim Primavera">Jardim Primavera</option>
+                      <option value="Buriti">Buriti</option>
+                      <option value="Lot. Melo">Lot. Melo</option>
+                      <option value="Vila Nova">Vila Nova</option>
+                      <option value="Silvestrini">Silvestrini</option>
+                      <option value="Alberto Franco">Alberto Franco</option>
+                      <option value="Cerâmica">Cerâmica</option>
+                      <option value="Alto da Boa Vista">Alto da Boa Vista</option>
+                      <option value="Corredor">Corredor</option>
+                      <option value="Vista Verde I">Vista Verde I</option>
+                      <option value="Vista Verde II">Vista Verde II</option>
+                  </optgroup>
+                  <optgroup label="ZONA OESTE">
+                      <option value="Sertãozinho">Sertãozinho</option>
+                      <option value="Alvorada I">Alvorada I</option>
+                      <option value="Alvorada II">Alvorada II</option>
+                  </optgroup>
+                  <optgroup label="ZONA RURAL">
+                      <option value="Paiolinho">Paiolinho</option>
+                      <option value="Campos">Campos</option>
+                      <option value="Barba de Bode">Barba de Bode</option>
+                      <option value="Capelinha do Embirizal">Capelinha do Embirizal</option>
+                      <option value="Cachoeirinha">Cachoeirinha</option>
+                      <option value="Posses">Posses</option>
+                      <option value="Congonhal">Congonhal</option>
+                      <option value="Garcias">Garcias</option>
+                      <option value="Piripau">Piripau</option>
+                      <option value="São Bartolomeu">São Bartolomeu</option>
+                      <option value="São João">São João</option>
+                      <option value="Santa Quitéria">Santa Quitéria</option>
+                      <option value="Nova Baden">Nova Baden</option>
+                      <option value="Serrinha">Serrinha</option>
+                      <option value="Serrote">Serrote</option>
+                      <option value="Jardim Floresta">Jardim Floresta</option>
+                      <option value="Zona Rural">Outro</option>
+                  </optgroup>
+                </select>
               </label>
               <label className={styles.label_input}>
                 <span>Endereço:</span>

@@ -41,7 +41,8 @@ const Card = ({ venda }) => {
             {venda.aluguel && <p className='aluguel'>/Mês</p>}
           </div>
             <h3>{venda.titulo}</h3>
-            {venda && caracteristicas.length > 0 ? <div className={styles.fast_inf}>
+            {venda.tipo === 'Terreno' ? (venda.area > 0 && <p style={{fontSize: '.9em', textAlign: 'center', marginTop: '10px'}}><BsArrowsAngleExpand/> {venda.area} m²</p>) : 
+            (venda && caracteristicas.length > 0 ? <div className={styles.fast_inf}>
               {caracteristicas.filter(itens => itens.ativado === 'true').slice(0, 4).map(item => (
                 <p key={item.id}>{iconMap[item.icon]} {item.quantidade} {item.name}</p>
               ))}
@@ -57,7 +58,7 @@ const Card = ({ venda }) => {
                 {venda.garagem && <p><FaCar/> Garagem</p>}
                 {venda.piscina && <p><FaWater/> Piscina</p>}
               </div>
-            </div>}
+            </div>)}
             
         </div>
         <div className={styles.button_area}>
