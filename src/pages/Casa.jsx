@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
 
 import { useFetchDocument } from '../hooks/useFetchDocument';
@@ -67,9 +67,9 @@ const Casa = () => {
       navigate('not-found')
     }
 
-    if(!loading){
-      window.scrollTo(0, 0)
-    }
+    // if(!loading){
+    //   window.scrollTo(0, 0)
+    // }
 
   return (
     <div>
@@ -131,7 +131,7 @@ const Casa = () => {
               </p>
             )) }
             </>}
-            <h4>Agende já uma visita!</h4>
+            <Link to={'/contato'} className={styles.link}>Agende já uma visita! &gt;</Link>
           </div>
         </div>}
         <div className={styles.contact}>
@@ -139,7 +139,7 @@ const Casa = () => {
           <h4><FaPhone/> Telefone: <span>(35) 9 9899-0790</span></h4>
           <h4><FaEnvelope/> Email: <span>imoveisgentil.mg@gmail.com</span> </h4> 
         </div>
-        {venda && <WhatsappBtn mensagem={`Olá, o imovel: ${venda.titulo}, localizado em: ${venda.endereco}, ainda está disponivel?`}/>}
+        {venda && <WhatsappBtn mensagem={`ID: ${id} %0A---------------------------------%0A Olá! O imóvel: ${venda.titulo}, ainda está disponivel?`}/>}
     </div>
   )
 }

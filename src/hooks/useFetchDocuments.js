@@ -5,14 +5,16 @@ import {
     query, 
     orderBy, 
     onSnapshot, 
-    where 
+    where,
+    limit,
 } from "firebase/firestore";
 
-export const useFetchDocuments = ( docCollection, aluguel, location, venda, tipoImv, cost) => {
+export const useFetchDocuments = ( docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage) => {
 
     const [documents, setDocuments] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(null)
+    const [hasMore, setHasMore] = useState(true)
 
     //deal with memory leak
 
@@ -143,7 +145,8 @@ export const useFetchDocuments = ( docCollection, aluguel, location, venda, tipo
                                     orderBy('createDat', 'desc'));
                 } else {
                     q = await query(collectionRef, 
-                                    orderBy('createDat', 'desc'));
+                                    orderBy('createDat', 'desc'),
+                                    limit(itemsPerPage));
                 }
                 
                 await onSnapshot(q, (querySnapshot) => {
@@ -153,6 +156,8 @@ export const useFetchDocuments = ( docCollection, aluguel, location, venda, tipo
                             ...doc.data(),
                         }))
                     )
+
+                    setHasMore(querySnapshot.docs.length === itemsPerPage);
                 })
 
                 setLoading(false)
@@ -165,11 +170,11 @@ export const useFetchDocuments = ( docCollection, aluguel, location, venda, tipo
         }
         
         loadData()
-    }, [docCollection, aluguel, location, venda, tipoImv, cost])
+    }, [docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage])
 
 //    useEffect(() => {
 //        return () => setCancelled(true);
 //    }, []);
 
-    return {documents, loading, error}
+    return {documents, loading, hasMore, error}
 }

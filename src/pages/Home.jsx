@@ -12,10 +12,9 @@ const Home = () => {
     const [tipo, setTipo] = useState('')
     const [cost, setCost] = useState('')
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 12;
+    const [itemsPerPage, setItemsPerPage] = useState(12);
 
-    const { documents: venda, loading } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost));
+    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost), itemsPerPage);
 
     const handleFilterChange = (isAluguel, selectedLocation, isSale, tipoImv, maxCost) => {
         setAluguel(isAluguel);
@@ -23,12 +22,11 @@ const Home = () => {
         setSale(isSale);
         setTipo(tipoImv);
         setCost((maxCost));
-        setCurrentPage(1); // Reset page to 1 on filter change
     };
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [currentPage])
+    // useEffect(() => {
+    //     window.scrollTo(0, 0)
+    // }, [])
 
     if (loading) {
         return (
@@ -42,15 +40,9 @@ const Home = () => {
         );
     }
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = venda ? venda.slice(indexOfFirstItem, indexOfLastItem) : [];
-
-    const totalPages = venda ? Math.ceil(venda.length / itemsPerPage) : 1;
-
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
+    const loadMore = () => {
+        setItemsPerPage(itemsPerPage + 10)
+    }    
 
     return (
         <div className='container'>
@@ -67,18 +59,14 @@ const Home = () => {
                     {cost !== '' && <p className='filter' onClick={() => setCost('')}>Até {parseFloat(cost).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} <FaPlus/></p>}
                 </div>
                 <div className='card-area'>
-                    {currentItems.length > 0 ? currentItems.map((casa) => <Card key={casa.id} venda={casa} />) : <h4>Nenhum imóvel correspondente à sua busca foi encontrado</h4>}
+                    {venda && venda.length > 0 ? venda.map((casa) => <Card key={casa.id} venda={casa} />) : <h4>Nenhum imóvel correspondente à sua busca foi encontrado</h4>}
                 </div>
                 <div className='pagination'>
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                            key={index}
-                            className={index + 1 === currentPage ? 'active' : ''}
-                            onClick={() => handlePageChange(index + 1)}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
+                    {hasMore === true ? 
+                    <button onClick={loadMore}>Carregar Mais Propriedades</button>
+                    :
+                    <p>Exibindo todos os {venda.length} imóveis</p>
+                    }
                 </div>
             </section>
             <Analytics />

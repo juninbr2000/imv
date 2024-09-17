@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 import {FaBars} from 'react-icons/fa'
+import { BiX } from 'react-icons/bi'
 
 import { useAuthentication } from "../hooks/useAuthentication"
 import { useAuthValue } from "../context/AuthContext"
@@ -48,7 +49,9 @@ const NavBar = () => {
           </Link>
         </div>
             
-        <button className={styles.btn_menu} onClick={IsMenuOpen}><FaBars/></button>
+        <button className={styles.btn_menu} onClick={IsMenuOpen}>
+          {menuOpen === false ? <FaBars/> : <BiX/>}
+        </button>
         {menuOpen === true && (
           <div className={styles.menu}>
             <ul>

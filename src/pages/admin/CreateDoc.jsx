@@ -63,11 +63,6 @@ const CreateDoc = () => {
       return;
     }
 
-    if (local === '') {
-      setFormError('O local precisa ser preenchido');
-      return;
-    }
-
     if (mtsqdd !== '' && Number.isNaN(parseFloat(mtsqdd))) {
       setFormError('Área foi preenchida de forma incorreta');
       return;
@@ -199,7 +194,7 @@ const CreateDoc = () => {
                   <optgroup label="ZONA SUL">
                       <option value="Volta do Lago">Volta do Lago</option>
                       <option value="Santana">Santana</option>
-                      <option value="Lot. Nova Lambari">Lot. Nova Lambari</option>
+                      <option value="Nova Lambari">Nova Lambari</option>
                       <option value="Corte de Pedra">Corte de Pedra</option>
                       <option value="Jardim do Lago">Jardim do Lago</option>
                       <option value="Lake City">Lake City</option>
@@ -242,7 +237,6 @@ const CreateDoc = () => {
                   <optgroup label="ZONA RURAL">
                       <option value="Paiolinho">Paiolinho</option>
                       <option value="Campos">Campos</option>
-                      <option value="Barba de Bode">Barba de Bode</option>
                       <option value="Capelinha do Embirizal">Capelinha do Embirizal</option>
                       <option value="Cachoeirinha">Cachoeirinha</option>
                       <option value="Posses">Posses</option>

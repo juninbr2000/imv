@@ -20,7 +20,6 @@ const Contacts = () => {
             <p><FaEnvelope/> imoveisgentil.mg@gmail.com</p>
             <h4>Telefone:</h4>
             <p><FaPhone/> (35) 9 9899-0790</p>
-            <p><FaPhone/> (35) 9 9168-1045</p>
             <Link to={'https://wa.me/5535998990790'} className={styles.wppBtn}>Entre em contato pelo Whatsapp <FaWhatsapp/></Link>
         </div>
         <div>
