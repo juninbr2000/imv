@@ -36,7 +36,7 @@
         align-items: center;
         justify-content: flex-start;
         background-color: #fff;
-        width: calc(100vw - 17px);
+        width: 100vw;
         border-radius: 0 0 5px 5px;
         box-sizing: border-box;
         & li{
