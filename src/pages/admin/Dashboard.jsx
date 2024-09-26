@@ -16,12 +16,12 @@ const Dashboard = () => {
     const [bairros, setBairros] = useState([]);
     const [local, setLocal] = useState('')
     const [searchTerm, setSearchTerm] = useState('');
-    const [collectionType, setCollectionType] = useState('venda'); // Estado para controlar a coleção
+    const [collectionType, setCollectionType] = useState('venda');
     const [alert, setAlert] = useState('')
     const navigate = useNavigate();
     
     const { deleteDocument, response } = useDeleteDocument(collectionType)
-    const { documents: venda, loading } = useFetchDocuments(collectionType) // Busca documentos da coleção selecionada
+    const { documents: venda, loading } = useFetchDocuments(collectionType)
 
     const handleMarkAsSold = async (imovel) => {
       try {
@@ -150,6 +150,7 @@ const Dashboard = () => {
                   {casa.aluguel && <p className='aluguel'>/Mês</p>}
                 </div>
                 {casa.endereco && <p>{casa.endereco}</p>}
+                {casa.city && <p>{casa.city}</p>}
                 <p className={styles.id}>ID: {casa.id}</p>
               </Link>
               <div className={styles.buttons_area}>

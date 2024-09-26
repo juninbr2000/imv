@@ -31,7 +31,7 @@ const Footer = () => {
         </div>
         <h4 className={styles.copy}>Imoveis-Gentil ©2024</h4>
         <div className={styles.credit}>
-            <p>Feito por <Link to='https://juninbr2000.github.io/portifolio1/' target='_blanck' >&lt;Edson Junior/&gt;</Link></p>
+            <p>Feito por <Link to='https://juninbr2000.github.io/portfolio/' target='_blanck' >&lt;Edson Junior/&gt;</Link></p>
         </div>
     </div>
   )

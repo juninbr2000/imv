@@ -11,23 +11,21 @@ const Home = () => {
     const [sale, setSale] = useState(false);
     const [tipo, setTipo] = useState('')
     const [cost, setCost] = useState('')
+    const [city, setCity] = useState('')
 
     const [itemsPerPage, setItemsPerPage] = useState(12);
 
-    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost), itemsPerPage);
+    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost), itemsPerPage, city);
 
-    const handleFilterChange = (isAluguel, selectedLocation, isSale, tipoImv, maxCost) => {
+    const handleFilterChange = (isAluguel, selectedLocation, isSale, tipoImv, maxCost, city) => {
         setAluguel(isAluguel);
         setLocation(selectedLocation);
         setSale(isSale);
         setTipo(tipoImv);
         setCost((maxCost));
+        setCity(city)
     };
-
-    // useEffect(() => {
-    //     window.scrollTo(0, 0)
-    // }, [])
-
+    console.log(venda)
     if (loading) {
         return (
             <div className="spinner">
@@ -52,6 +50,7 @@ const Home = () => {
             <section className='cards'>
                 <h1 className='section-title'>Principais Resultados</h1>
                 <div className='filter_container'>
+                    {city !== "" && <p className='filter' onClick={() => setCity("")}>{city} <FaPlus/></p>}
                     {sale === true && <p className='filter' onClick={() => setSale(false)}>Venda <FaPlus/></p>}
                     {aluguel === true && <p className='filter' onClick={() => setAluguel(false)}>Aluguel <FaPlus/></p>}
                     {location !== '' && <p className='filter' onClick={() => setLocation("")}> {location} <FaPlus/></p>}

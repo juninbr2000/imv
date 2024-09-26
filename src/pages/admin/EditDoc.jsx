@@ -24,6 +24,7 @@ const EditDoc = () => {
   const [tipo, setTipo] = useState('');
   const [caracteristicas, setCaracteristicas] = useState([]);
   const [real, setReal] = useState('')
+  const [city, setCity] = useState('Lambari')
   const { updateDocument } = useUpdateDocument('venda');
   const navigate = useNavigate();
 
@@ -40,6 +41,7 @@ const EditDoc = () => {
       setImagens(casa.imagens || []);
       setTipo(casa.tipo);
       setReal('R$ ' + casa.valor + ',00')
+      setCity(casa.city || 'Lambari')
       setCaracteristicas(casa.caracteristicas || [
         {id: 1, name: 'Quartos', quantidade: 0, ativado: 'false', icon: 'FaBed'},
         {id: 2, name: 'Garagem', ativado: 'false', icon: 'FaCar' },
@@ -103,6 +105,12 @@ const EditDoc = () => {
       return;
     }
 
+    if(city === ''){
+      setFormError('Selecione a cidade onde o imovel esta localizado')
+      setStep(4)
+      return
+    }
+
     const area = mtsqdd === '' ? 0 : parseFloat(mtsqdd);
     const preco = parseFloat(valor);
 
@@ -125,6 +133,7 @@ const EditDoc = () => {
       local,
       endereco,
       descricao,
+      city,
       venda,
       aluguel,
       area,
@@ -207,10 +216,17 @@ const EditDoc = () => {
             </div>
             <h2>Detalhes do Imóvel</h2>
             <label className={styles.label_input}>
-              <span>Local: (Bairro)</span>
-              <select value={local} onChange={(e) => setLocal(e.target.value)}>
-                  <optgroup label='NÃO ESPECIFICAR'>
-                      <option value="">Lambari MG</option>
+                <span>Cidade:</span>
+                <input type="text"  value={city} onChange={(e) => setCity(e.target.value)}/>
+              </label>
+              <label className={styles.label_input}>
+                <span>Bairro:</span>
+                {city === 'Lambari'  ? 
+                <select value={local} onChange={(e) => setLocal(e.target.value)}>
+                  <optgroup label='Outros'>
+                      <option value="Lambari MG">Lambari MG</option>
+                      <option value="Centro">Centro</option>
+                      <option value="Zona Rural">Zona Rural</option>
                   </optgroup>
                   <optgroup label="ZONA SUL">
                       <option value="Volta do Lago">Volta do Lago</option>
@@ -274,6 +290,9 @@ const EditDoc = () => {
                       <option value="Zona Rural">Outro</option>
                   </optgroup>
                 </select>
+                 :
+                  <input type='text' value={local} onChange={(e) => setLocal(e.target.value)}></input> 
+                }
               </label>
             <label className={styles.label_input}>
               <span>Endereço:</span>

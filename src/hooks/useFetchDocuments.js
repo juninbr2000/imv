@@ -9,172 +9,69 @@ import {
     limit,
 } from "firebase/firestore";
 
-export const useFetchDocuments = ( docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage) => {
+export const useFetchDocuments = (docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city) => {
+    const [documents, setDocuments] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
+    const [hasMore, setHasMore] = useState(true);
 
-    const [documents, setDocuments] = useState(null)
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(null)
-    const [hasMore, setHasMore] = useState(true)
-
-    //deal with memory leak
-
-    const [cancelled, setCancelled] = useState(false)
+    const [cancelled, setCancelled] = useState(false);
 
     useEffect(() => {
+        async function loadData() {
+            if (cancelled) return;
 
-        async function loadData(){
-            if(cancelled) {
-                return
-            }
+            setLoading(true);
+            const collectionRef = await collection(db, docCollection);
 
-            setLoading(true)
-
-            const collectionRef = await collection(db, docCollection)
-
-            
             try {
-                
-                let q;
-                //dashboar
-                
-                if (venda && location && tipoImv && cost) {
-                    q = await query(collectionRef, 
-                                    where('venda', '==', venda), 
-                                    where('local', '==', location), 
-                                    where('tipo', '==', tipoImv), 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (aluguel && location && tipoImv && cost) {
-                    q = await query(collectionRef, 
-                                    where('aluguel', '==', aluguel), 
-                                    where('local', '==', location), 
-                                    where('tipo', '==', tipoImv), 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (venda && location && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('venda', '==', venda), 
-                                    where('local', '==', location), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (aluguel && location && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('aluguel', '==', aluguel), 
-                                    where('local', '==', location), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (venda && location && cost) {
-                    q = await query(collectionRef, 
-                                    where('venda', '==', venda), 
-                                    where('local', '==', location), 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (aluguel && location && cost) {
-                    q = await query(collectionRef, 
-                                    where('aluguel', '==', aluguel), 
-                                    where('local', '==', location), 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (location && tipoImv && cost) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    where('tipo', '==', tipoImv), 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (location && venda && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    where('venda', '==', venda), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (location && aluguel && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    where('aluguel', '==', aluguel), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (location && venda) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    where('venda', '==', venda), 
-                                    orderBy('createDat', 'desc'));
-                } else if (location && aluguel) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    where('aluguel', '==', aluguel), 
-                                    orderBy('createDat', 'desc'));
-                } else if (location && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (venda && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('venda', '==', venda), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (aluguel && tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('aluguel', '==', aluguel), 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (tipoImv && cost) {
-                    q = await query(collectionRef, 
-                                    where('tipo', '==', tipoImv), 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (tipoImv) {
-                    q = await query(collectionRef, 
-                                    where('tipo', '==', tipoImv), 
-                                    orderBy('createDat', 'desc'));
-                } else if (location) {
-                    q = await query(collectionRef, 
-                                    where('local', '==', location), 
-                                    orderBy('createDat', 'desc'));
-                } else if (cost) {
-                    q = await query(collectionRef, 
-                                    where('valor', '<=', cost), 
-                                    orderBy('valor', 'desc'));
-                } else if (aluguel) {
-                    q = await query(collectionRef, 
-                                    where('aluguel', '==', aluguel), 
-                                    orderBy('createDat', 'desc'));
-                } else if (venda) {
-                    q = await query(collectionRef, 
-                                    where('venda', '==', venda), 
-                                    orderBy('createDat', 'desc'));
-                } else {
-                    q = await query(collectionRef, 
-                                    orderBy('createDat', 'desc'),
-                                    limit(itemsPerPage));
+                // Construindo a query com base nas condições
+                const conditions = [];
+
+                if (city) {
+                    conditions.push(where('city', '==', city));
                 }
-                
+                if (venda) {
+                    conditions.push(where('venda', '==', venda));
+                }
+                if (aluguel) {
+                    conditions.push(where('aluguel', '==', aluguel));
+                }
+                if (location) {
+                    conditions.push(where('local', '==', location));
+                }
+                if (tipoImv) {
+                    conditions.push(where('tipo', '==', tipoImv));
+                }
+                if (cost) {
+                    conditions.push(where('valor', '<=', cost));
+                }
+
+                let orderConditions = [];
+                if (cost) {
+                    orderConditions.push(orderBy('valor', 'desc')); // Ordena pelo valor em ordem decrescente
+                }
+                orderConditions.push(orderBy('createDat', 'desc')); // Ordena pela data de criação
+
+                const q = query(collectionRef, ...conditions, ...orderConditions, limit(itemsPerPage));
+
+                // Executando a consulta e atualizando o estado
                 await onSnapshot(q, (querySnapshot) => {
-                    setDocuments(
-                        querySnapshot.docs.map((doc) => ({
-                            id: doc.id,
-                            ...doc.data(),
-                        }))
-                    )
-
+                    setDocuments(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
                     setHasMore(querySnapshot.docs.length === itemsPerPage);
-                })
+                });
 
-                setLoading(false)
-                
+                setLoading(false);
             } catch (error) {
-                setError(error.message)
-                
-                setLoading(false)
+                setError(error.message);
+                setLoading(false);
             }
         }
-        
-        loadData()
-    }, [docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage])
 
-//    useEffect(() => {
-//        return () => setCancelled(true);
-//    }, []);
+        loadData();
 
-    return {documents, loading, hasMore, error}
-}
+        // return () => setCancelled(true);
+    }, [docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city]);
+
+    return { documents, loading, hasMore, error };
+};

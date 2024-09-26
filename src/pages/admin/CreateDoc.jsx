@@ -24,6 +24,7 @@ const CreateDoc = () => {
   const [mtsqdd, setMtsqdd] = useState('');
   const [tipo, setTipo] = useState('');
   const [step, setStep] = useState(1);
+  const [city,  setCity] = useState("Lambari")
   const [caracteristicas, setCaracteristicas] = useState([
     {id: 1, name: 'Quartos', quantidade: 0, ativado: 'false', icon: 'FaBed'},
     {id: 2, name: 'Garagem', ativado: 'false', icon: 'FaCar' },
@@ -67,6 +68,11 @@ const CreateDoc = () => {
       setFormError('Área foi preenchida de forma incorreta');
       return;
     }
+    if (city === ''){
+      setStep(2)
+      setFormError('escolha a cidade onde o imovel esta localizado')
+      return;
+    }
 
     setStep(5)
 
@@ -86,6 +92,7 @@ const CreateDoc = () => {
       valor,
       local,
       endereco,
+      city,
       // quartos,
       // banheiros,
       // garagem,
@@ -186,10 +193,17 @@ const CreateDoc = () => {
                 </label>
               </div>
               <label className={styles.label_input}>
-                <span>Local:</span>
+                <span>Cidade:</span>
+                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+              </label>
+              <label className={styles.label_input}>
+                <span>Bairro:</span>
+                {city === 'Lambari'  ? 
                 <select value={local} onChange={(e) => setLocal(e.target.value)}>
-                  <optgroup label='NÃO ESPECIFICAR'>
-                      <option value="">Lambari MG</option>
+                  <optgroup label='Outros'>
+                      <option value="Lambari MG">Lambari MG</option>
+                      <option value="Centro">Centro</option>
+                      <option value="Zona Rural">Zona Rural</option>
                   </optgroup>
                   <optgroup label="ZONA SUL">
                       <option value="Volta do Lago">Volta do Lago</option>
@@ -253,6 +267,9 @@ const CreateDoc = () => {
                       <option value="Zona Rural">Outro</option>
                   </optgroup>
                 </select>
+                 :
+                  <input type='text' value={local} onChange={(e) => setLocal(e.target.value)}></input> 
+                }
               </label>
               <label className={styles.label_input}>
                 <span>Endereço:</span>
