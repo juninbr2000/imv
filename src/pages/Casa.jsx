@@ -139,7 +139,7 @@ const Casa = () => {
           <h4><FaPhone/> Telefone: <span>(35) 9 9899-0790</span></h4>
           <h4><FaEnvelope/> Email: <span>imoveisgentil.mg@gmail.com</span> </h4> 
         </div>
-        {venda && <WhatsappBtn mensagem={`ID: ${id} %0A---------------------------------%0A Olá! O imóvel: ${venda.titulo}, ainda está disponivel?`}/>}
+        {venda && <WhatsappBtn mensagem={`https://imoveisgentil.com.br/${id} %0A%0AID: ${id} %0A---------------------------------%0A Olá! O imóvel: ${venda.titulo}, ainda está disponivel?`}/>}
     </div>
   )
 }
