@@ -33,10 +33,10 @@ const Casa = () => {
     }
 
     useEffect(() => {
+      window.scrollTo(0, 0)
       if(venda){
         setCarac(venda.caracteristicas || [])
-        document.title = `${venda.titulo} | Imóveis Gentil`
-        console.log(venda)
+        document.title = `${venda.venda === true ? 'Vende-se ': 'Aluga-se '}${venda.titulo} | Imóveis Gentil`
         return () => {
           document.title = 'Imóveis Gentil | Lambari MG';
         };
