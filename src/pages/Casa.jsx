@@ -2,21 +2,25 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
 
 import { useFetchDocument } from '../hooks/useFetchDocument';
+import { getRecomendations } from '../hooks/useFetchRecomendations'
 
-import { FaCamera, FaCar, FaWater, FaCouch, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree } from 'react-icons/fa';
+import { FaCamera, FaCar, FaWater, FaCouch, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaImage, FaVideo, FaVideoSlash } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
 import { BiSolidWasher } from 'react-icons/bi'
 
 import styles from './Casa.module.css'
 import WhatsappBtn from '../components/WhatsappBtn';
+import Card from '../components/Card';
 
 const Casa = () => {
 
     const { id } = useParams();
-    const { document: venda , loading} = useFetchDocument("venda", id)
-    const [i, setI]= useState(0)
+    const { document: venda , loading} = useFetchDocument("venda", id) 
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [videoSelected, setVideoSelected] = useState(false)
     const navigate = useNavigate()
+    const [embedUrl, setEmbedUrl] = useState('')
+    const [recomendado, setRecomendado] = useState([])
     const [carac, setCarac] = useState([])
     const iconMap = {
       FaBed: <FaBed/>,
@@ -34,14 +38,39 @@ const Casa = () => {
 
     useEffect(() => {
       window.scrollTo(0, 0)
+
+      setCarac([])
+      setCurrentIndex(0)
+      setRecomendado([])
+
       if(venda){
+        if(venda.video){
+          setEmbedUrl(getEmbedUrl(venda.video))
+        }
+
+        //altera as meta tags para facilitar buscas por mecanismos
         setCarac(venda.caracteristicas || [])
         document.title = `${venda.venda === true ? 'Vende-se ': 'Aluga-se '}${venda.titulo} | Imóveis Gentil`
+
+        const MetaDescription = document.querySelector('meta[name="description"]')
+        if(MetaDescription) {
+          MetaDescription.setAttribute('content', `Valor: ${venda.valor.toLocaleString('pt-br', {'style': 'currency', 'currency': 'BRL'})}. Sobre o Imovel: ${venda.descricao}.`)
+        }
+
+        //Busca Imoveis com tipo e valor
+        getRecomendations(id, venda.valor, venda.tipo)
+        .then(data => setRecomendado(data))
+        .catch(error => console.error("Erro ao carregar recomendações:", error));
+
         return () => {
+          //retorna os valores padroes das meta tags
           document.title = 'Imóveis Gentil | Lambari MG';
+          if(MetaDescription){
+            MetaDescription.setAttribute('content', 'Bem-vindo à Imóveis Gentil. Somos especialistas em encontrar o lar perfeito para você e sua família. Com uma abordagem gentil e personalizada, oferecemos uma ampla seleção de propriedades que atendem às suas necessidades e estilo de vida. Deixe-nos ajudá-lo a encontrar o lar dos seus sonhos com a gentileza e a expertise que você merece.')
+          }
         };
       }
-    }, [venda])
+    }, [id, venda])
 
     if(loading){
         return <div className="spinner">
@@ -63,10 +92,15 @@ const Casa = () => {
       )
     }
 
-    if(venda === undefined){
+    if(!venda && loading === false){
       navigate('not-found')
     }
 
+    const getEmbedUrl = (url) => {
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/);
+      return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+    };
+    
     // if(!loading){
     //   window.scrollTo(0, 0)
     // }
@@ -75,16 +109,39 @@ const Casa = () => {
     <div>
         {venda && <div className={styles.casa_container}>
           <div className={styles.imagens_container}>
-            {venda.imagens !== undefined ? <img src={venda.imagens[currentIndex]} alt="" /> : <div className={styles.noPic}><div className={styles.line}></div><FaCamera/></div>}
+            {venda.imagens !== undefined && !videoSelected ? 
+              <img src={venda.imagens[currentIndex]} alt="" />
+              :
+              <div className={styles.noPic}>
+                <iframe width="560" height="315" 
+                  src={`${embedUrl}?autoplay=1&mute=1&rel=0`} 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen>
+                </iframe>
+              </div>
+            }
             <div className={styles.change_image}>
-              {venda.imagens !== undefined && venda.imagens.map((imagem, index)=> <label  className={styles.image_label} key={index}>
+              {venda.imagens !== undefined && !videoSelected && venda.imagens.map((imagem, index)=> <label  className={styles.image_label} key={index}>
                 <input type='radio' name='images' value={index} checked={index === currentIndex} onChange={() => setCurrentIndex(index)}/>
                 <span></span>
                 </label>)}
-                {venda.imagens !== undefined && <div className={styles.control}>
+                {venda.imagens !== undefined &&!videoSelected && <div className={styles.control}>
                   <button onClick={() => prevImage()}><FaArrowLeft/></button>
                   <button onClick={() => nextImage()}><FaArrowRight/></button>
                 </div>}
+                {venda.video ? <div className={styles.midiaControl}>
+                  <button onClick={() => setVideoSelected(false)} className={styles.btnImageVideo}><FaImage/>{venda.imagens.length} Fotos</button>
+                  <button onClick={() => setVideoSelected(true)}className={styles.btnImageVideo}><FaVideo/> Video</button>
+                </div>
+                :
+                <div className={styles.midiaControl}>
+                  <button onClick={() => setVideoSelected(false)} className={styles.btnImageVideo}><FaImage/> {venda.imagens.length} Fotos</button>
+                  <button className={styles.btnImageVideo} disabled><FaVideoSlash/> Video</button>
+                </div>
+                }
             </div>
           </div>   
           <div className={styles.casa_info_cont}>
@@ -139,7 +196,15 @@ const Casa = () => {
           <h4><FaPhone/> Telefone: <span>(35) 9 9899-0790</span></h4>
           <h4><FaEnvelope/> Email: <span>imoveisgentil.mg@gmail.com</span> </h4> 
         </div>
-        {venda && <WhatsappBtn mensagem={`https://imoveisgentil.com.br/${id} %0A%0AID: ${id} %0A---------------------------------%0A Olá! O imóvel: ${venda.titulo}, ainda está disponivel?`}/>}
+
+        {recomendado.length > 0 && <div className={styles.recomendations}>
+          <h2>Você Pode se Interessar</h2>
+          <div className={styles.recomendado_container}>
+            {recomendado && recomendado.length > 0 ? recomendado.map((recomend) => <Card key={recomend.id} venda={recomend}></Card>) : <p>Nenhuma recomendaçao encontrada</p>}
+          </div>
+        </div>}
+
+        {venda && <WhatsappBtn mensagem={`https://imoveisgentil.com.br/${id} %0A%0AID: ${id} %0A%0A *_Não Apague os Dados Acima_* %0A---------------------------------%0AOlá! O imóvel: ${venda.titulo}%0A•Valor: ${venda.valor.toLocaleString('pt-br',{'style': 'currency', 'currency': 'BRL'})},%0A•Localização: ${venda.endereco},%0AAinda está disponivel?`}/>}
     </div>
   )
 }

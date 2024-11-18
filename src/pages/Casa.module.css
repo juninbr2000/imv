@@ -7,6 +7,7 @@
     justify-content: space-between;
     background-color: #eae9e9;
     border-radius: 0 0 15px 15px;
+    position: relative;
     & img{
         height: 100%;
         border-radius: 0 0 15px 15px;
@@ -36,11 +37,10 @@
     position: relative;
     border-radius: 0 0 20px 20px;
 }
-.noPic svg{
-    background-color: #ccc;
-    z-index: 3;
-    padding: 10px;
-    border-radius: 20px;
+.noPic iframe{
+    height: 100%;
+    width: 100%;
+    border-radius: 0 0 20px 20px;
 }
 .noPic .line{
     height: 20px;
@@ -75,6 +75,38 @@
         }
     }
 }
+
+
+.midiaControl{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    gap: 5px;
+}
+.btnImageVideo{
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #192436;
+    box-shadow: 2px 4px 10px 0 #0000003a;
+    cursor: pointer;
+    background-color: #e4e4e4;
+    font-weight: 500;
+    transition: all .3s ease;
+}
+.btnImageVideo:disabled{
+    cursor: not-allowed;
+    background-color: #e4e4e475;
+}
+.btnImageVideo:hover{
+    background-color: #b8b7b7;
+}
+
+
 .title{
     color: #818181;
     margin-top: 20px;
@@ -157,7 +189,7 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 230px;
+    top: 120px;
     & button{
         border: none;
         width: 40px;
@@ -208,6 +240,30 @@
     color: #818181;
 }
 
+.recomendations{
+    max-width: 1024px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    position: relative;
+    & h2{
+        color: #192436;
+    }
+}
+.recomendado_container{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: none;
+    gap: 15px;
+    padding: 15px 10px;
+}
+.recomendado_container div{
+    width: 280px;
+    & a{
+        width: 90%;
+    }
+}
+
+
 
 
 /* @media screen and (min-width: 481px) {
@@ -236,8 +292,12 @@
         font-size: 6em;
     }
     .control{
-        top: 320px;
+        top: 210px;
         max-width: 1024px;
+    }
+    .midiaControl{
+        left: 65px;
+        top: 25px;
     }
     .control > button:nth-child(1){
         margin-left: 50px;

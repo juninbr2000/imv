@@ -6,38 +6,37 @@ export const useFetchDocument = ( docCollection, id ) => {
 
     const [document, setDocument] = useState(null)
     const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     //deal with memory leak
     const [cancelled, setCancelled] = useState(false)
 
     useEffect(() => {
-
         const loadDocument = async () => {
-            if(cancelled) return
-
-            setLoading(true)
-
-            try {
-                
-                const docRef = await doc(db, docCollection, id)
-                const docSnap = await getDoc(docRef)
-
-                setDocument(docSnap.data())
-                
-                setLoading(false)
-            } catch (error) {
-                
-                console.log(error)
-                setError(error.message)
-
-                setLoading(true)
+          setLoading(true); // Inicia o loading
+          setError(null); // Reseta erros anteriores
+    
+          try {
+            const docRef = doc(db, docCollection, id);
+            const docSnap = await getDoc(docRef);
+    
+            if (docSnap.exists()) {
+              setDocument(docSnap.data());
+            } else {
+              setDocument(null); // Se não encontrar, reseta o documento
             }
-                
+          } catch (error) {
+            console.error("Erro ao buscar documento:", error);
+            setError(error.message);
+          } finally {
+            setLoading(false); // Finaliza o loading
+          }
+        };
+    
+        if (id) {
+          loadDocument();
         }
-        
-        loadDocument()
-    }, [docCollection, id, cancelled])
+      }, [docCollection, id]);
 
     useEffect(() => {
         return () => setCancelled(true) 

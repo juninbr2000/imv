@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storageService } from '../../firebase/config';
@@ -20,6 +20,7 @@ const CreateDoc = () => {
   const [formError, setFormError] = useState('');
   const [venda, setVenda] = useState(true);
   const [aluguel, setAluguel] = useState(false);
+  const [video, setVideo] = useState('')
   const [real, setReal] = useState('')
   const [mtsqdd, setMtsqdd] = useState('');
   const [tipo, setTipo] = useState('');
@@ -40,6 +41,14 @@ const CreateDoc = () => {
     {id: 12, name: 'Jardim', ativado: 'false', icon: 'FaTree'},
   ])
 
+  useEffect(() => {
+    if(formError !== ""){
+      setTimeout(() => {
+        setFormError('')
+      }, 5000);
+    }
+  }, [formError])
+
   const { insertDocument, response } = useInsertDocument('venda') 
   const navigate = useNavigate();
 
@@ -48,8 +57,18 @@ const CreateDoc = () => {
     setImagens(selectedImages);
   };
 
+  const validateYouTubeUrl = (url) => {
+    const regex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}$/;
+    return regex.test(url);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!validateYouTubeUrl(video) && video !== ""){
+      setFormError('O link do video é invalido!')
+      return
+    }
 
     if (titulo === '') {
       setFormError('O título precisa ser preenchido');
@@ -102,7 +121,8 @@ const CreateDoc = () => {
       aluguel,
       area,
       tipo,
-      caracteristicas
+      caracteristicas,
+      video
     }, imagens);
 
     navigate('/dashboard');
@@ -150,6 +170,7 @@ const CreateDoc = () => {
                   <option value="Galpao">Galpão</option>
                   <option value="Fazenda">Fazenda</option>
                   <option value="Sitio">Sítio</option>
+                  <option value="Ponto Comercial">Ponto Comercial</option>
                 </select>
               </label>
             </div>
@@ -344,6 +365,10 @@ const CreateDoc = () => {
               <label className={styles.label_input}>
                 <span>Área: </span>
                 <input type="text" value={mtsqdd} onChange={(e) => setMtsqdd(e.target.value)} placeholder='Área total' />
+              </label>
+              <label className={styles.label_input}>
+                <span>Tem algum Video? coloque o link:</span>
+                <input type='text' value={video} name='video' onChange={(e) => setVideo(e.target.value)} placeholder='Link do Video (youtube)' />
               </label>
               <label className={styles.text_area}>
                 <span>Descrição:</span>

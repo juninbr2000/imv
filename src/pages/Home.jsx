@@ -17,7 +17,7 @@ const Home = () => {
     const [itemsPerPage, setItemsPerPage] = useState(15);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost), itemsPerPage, city);
+    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost), itemsPerPage, city); //voltar para venda
 
     const handleFilterChange = (isAluguel, selectedLocation, isSale, tipoImv, maxCost, city) => {
         setAluguel(isAluguel);

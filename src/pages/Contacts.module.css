@@ -1,49 +1,82 @@
 .contact_container{
+    color: #192436;
+    padding: 20px;   
+}
+.main_title{
+    font-size: 1.8em;
+}
+.local_cont{
     background-color: #192436;
-    color: #C5AD69;
-    padding: 40px 20px;
-    border-radius: 15px;
-    margin: auto;
-    margin-top: 80px;
-    width: 90vw;
-    box-shadow: 2px 1px 15px #00000048;
-    margin-bottom: 100px;
-    & h3, h4{
-        text-align: left;
-    }
-    & p{
-        color: #818181;
-        margin-left: 20px;
-    }
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 15px;
     & iframe{
         border: none;
+        border-radius: 0 0 5px 5px;
+        margin-bottom: -10px;
     }
 }
-.wppBtn{
-    width: 100%;
-    text-align: center;
-    background-color: #25D366;
-    padding: 10px 20px;
-    text-decoration: none;
-    margin-top: 25px;
+.local_info{
+    padding: 20px;
+    color: #aaa;
+    & h3{
+        color: #C5AD69;
+    }
+}
+
+.card_container{
     display: flex;
-    color: #fff;
-    align-items: center;
-    justify-content: center;
-    border-radius: 25px;
-    gap: 10px;
-    font-size: 1em;
-    & svg{
-        font-size: 1.3em;
+    flex-direction: column;
+}
+.card{
+    background-color: #acadb0;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 20px;
+    & .destaque{
+        padding: 8px 10px;
+        background-color: #192436;
+        border-radius: 5px;
+        color: #C5AD69;
+        text-align: center;
+        font-weight: bold;
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
     }
 }
-@media screen and (min-width: 788px){
+
+@media screen and (min-width: 788px) {
     .contact_container{
-        width: 650px;
-        padding: 40px 50px;
-        & iframe{
-            border: none;
-            height: 350px;
+        max-width: 1240px;
+        margin: 0  auto;
+    }
+    .local_cont{
+        display: flex;
+        align-items: center;
+        height: 250px;
+        & h3{
+            margin-bottom: 20px;
         }
+        & iframe{
+            height: 100%;
+            margin: 0;
+            border-radius: 0 5px 5px 0;
+            width: 75%;
+        }
+    }
+
+    .card_container{
+        flex-direction: row;
+        gap: 5px;
+    }
+    .card{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 }

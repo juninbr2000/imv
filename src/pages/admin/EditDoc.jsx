@@ -25,6 +25,7 @@ const EditDoc = () => {
   const [caracteristicas, setCaracteristicas] = useState([]);
   const [real, setReal] = useState('')
   const [city, setCity] = useState('Lambari')
+  const [video, setVideo] = useState('')
   const { updateDocument } = useUpdateDocument('venda');
   const navigate = useNavigate();
 
@@ -42,6 +43,7 @@ const EditDoc = () => {
       setTipo(casa.tipo);
       setReal('R$ ' + casa.valor + ',00')
       setCity(casa.city || 'Lambari')
+      setVideo(casa.video || '')
       setCaracteristicas(casa.caracteristicas || [
         {id: 1, name: 'Quartos', quantidade: 0, ativado: 'false', icon: 'FaBed'},
         {id: 2, name: 'Garagem', ativado: 'false', icon: 'FaCar' },
@@ -78,6 +80,11 @@ const EditDoc = () => {
     setImagens((prevImages) => [...prevImages, ...selectedImages]);
   };
 
+  const validateYouTubeUrl = (url) => {
+    const regex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}$/;
+    return regex.test(url);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -97,6 +104,11 @@ const EditDoc = () => {
       setFormError('O valor está preenchido de forma errada');
       setStep(4)
       return;
+    }
+
+    if(!validateYouTubeUrl(video) && video !== ''){
+      setFormError('O link do Video esta incorreto')
+      return
     }
     
     if (mtsqdd !== '' && Number.isNaN(parseFloat(mtsqdd))) {
@@ -138,6 +150,7 @@ const EditDoc = () => {
       aluguel,
       area,
       tipo,
+      video,
       caracteristicas,
       imagens: [...existingImageUrls, ...newImageUrls],
     });
@@ -185,6 +198,7 @@ const EditDoc = () => {
                 <option value="Galpao">Galpão</option>
                 <option value="Fazenda">Fazenda</option>
                 <option value="Sitio">Sítio</option>
+                <option value="Ponto Comercial">Ponto Comercial</option>
               </select>
             </label>
             <label className={styles.label_input}>
@@ -237,6 +251,7 @@ const EditDoc = () => {
                       <option value="Lake City">Lake City</option>
                       <option value="Lake City II">Lake City II</option>
                       <option value="Galo Branco">Galo Branco</option>
+                      <option value="Floresta">Floresta</option>
                       <option value="Galo de Ouro">Galo de Ouro</option>
                       <option value="Vale do Sol">Vale do Sol</option>
                       <option value="Pinhão Roxo">Pinhão Roxo</option>
@@ -389,6 +404,16 @@ const EditDoc = () => {
                 onChange={(e) => setDescricao(e.target.value)}
                 placeholder="Descreva o imóvel"
               ></textarea>
+            </label>
+            <label className={styles.label_input}>
+              <span>Video:</span>
+              <input
+                type="text"
+                name="video"
+                value={video}
+                onChange={(e) => setVideo(e.target.value)}
+                placeholder="Coloque o link para o video"
+              />
             </label>
             <label className={styles.label_input}>
               <span>Imagens:</span>
