@@ -26,7 +26,7 @@ const Footer = () => {
             <h3>Nossas Redes Sociais:</h3>
             <Link to='https://www.facebook.com/share/3FDMxtVPRnZD7dKJ/?mibextid=qi20mg' target='_blank'><FaFacebook/></Link>
             <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F'><FaInstagram/></Link>
-            <Link to='/' style={{cursor: "not-allowed"}}><FaYoutube/></Link>
+            <Link to='https://youtube.com/@imoveisgentil'><FaYoutube/></Link>
             <Link to='https://t.me/Imoveisgentil' target='_blank'><FaTelegram/></Link>
         </div>
         <h4 className={styles.copy}>Imoveis-Gentil ©2024</h4>

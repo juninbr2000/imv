@@ -25,6 +25,7 @@ const CreateDoc = () => {
   const [mtsqdd, setMtsqdd] = useState('');
   const [tipo, setTipo] = useState('');
   const [step, setStep] = useState(1);
+  const [exclusive, setExclusive] = useState(false)
   const [city,  setCity] = useState("Lambari")
   const [caracteristicas, setCaracteristicas] = useState([
     {id: 1, name: 'Quartos', quantidade: 0, ativado: 'false', icon: 'FaBed'},
@@ -122,7 +123,8 @@ const CreateDoc = () => {
       area,
       tipo,
       caracteristicas,
-      video
+      video,
+      exclusive
     }, imagens);
 
     navigate('/dashboard');
@@ -172,6 +174,10 @@ const CreateDoc = () => {
                   <option value="Sitio">Sítio</option>
                   <option value="Ponto Comercial">Ponto Comercial</option>
                 </select>
+              </label>
+              <label className={styles.checkbox}>
+                <span>Exclusivo:</span>
+                <input type="checkbox" checked={exclusive} onChange={(e) => setExclusive(e.target.checked)} />
               </label>
             </div>
             <button type="button" onClick={handleNextStep} className={styles.nextStep}>Continuar &gt;</button>

@@ -20,6 +20,7 @@ const EditDoc = () => {
   const [formError, setFormError] = useState('');
   const [venda, setVenda] = useState(true);
   const [aluguel, setAluguel] = useState(false);
+  const [exclusive, setExclusive] = useState(false)
   const [mtsqdd, setMtsqdd] = useState('');
   const [tipo, setTipo] = useState('');
   const [caracteristicas, setCaracteristicas] = useState([]);
@@ -34,6 +35,7 @@ const EditDoc = () => {
       setTitulo(casa.titulo);
       setValor(casa.valor);
       setLocal(casa.local);
+      setExclusive(casa.exclusive || false)
       setEndereco(casa.endereco);
       setDescricao(casa.descricao);
       setVenda(casa.venda);
@@ -152,6 +154,7 @@ const EditDoc = () => {
       tipo,
       video,
       caracteristicas,
+      exclusive,
       imagens: [...existingImageUrls, ...newImageUrls],
     });
 
@@ -213,6 +216,10 @@ const EditDoc = () => {
                   }}
                   placeholder='Valor do imóvel' />
             </label>
+            <label className={styles.checkbox}>
+                <span>Exclusivo:</span>
+                <input type="checkbox" checked={exclusive} onChange={(e) => setExclusive(e.target.checked)} />
+              </label>
             <div className={styles.buttons}>
               <button type="button" onClick={handleNextStep} className={styles.nextStep}>
                 Continuar &gt;

@@ -42,7 +42,17 @@
         background-color: rgb(71, 140, 62);
     }
 }
-
+.checkbox{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+.checkbox span {
+    font-size: 1rem;
+    color: #333;
+}
 .imageGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));

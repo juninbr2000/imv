@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaCamera, FaCar, FaWater, FaCouch, FaBed, FaShower, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaPlus } from 'react-icons/fa';
+import { FaCamera, FaCar, FaWater, FaCouch, FaBed, FaShower, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaPlus, FaCrown } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
 import { BiSolidWasher } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ const Card = ({ venda }) => {
   const tempototal = venda.createDat.seconds + tresdigitos
   const date = new Date()
   const s = date.getTime()
-  const tresdias = 259200000
+  const tresdias = 432000000
   const navigate = useNavigate()
   const caracteristicas = venda.caracteristicas || []
 
@@ -34,6 +34,7 @@ const Card = ({ venda }) => {
         <div className={styles.card_images}>
             {venda.imagens !== undefined ? <img src={venda.imagens[0]} alt="" /> : <div className={styles.noPic}><FaCamera/></div>}
             {s - tempototal <= tresdias && <div className={styles.tag}><p><FaPlus/>Novo</p></div>}
+            {venda.exclusive && <div className={styles.tag}><p><FaCrown/> Exclusivo</p></div>}
         </div>
         <div className={styles.card_info}>
           <div className='price'>
