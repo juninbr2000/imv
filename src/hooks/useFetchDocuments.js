@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 
 export const useFetchDocuments = (docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city) => {
-    const [documents, setDocuments] = useState(null);
+    const [documents, setDocuments] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
     const [hasMore, setHasMore] = useState(true);

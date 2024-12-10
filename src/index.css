@@ -129,7 +129,6 @@ body{
   animation: spin 1s linear infinite;
 }
 
-
 .pagination{
   display: flex;
   align-items: center;

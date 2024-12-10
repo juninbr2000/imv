@@ -19,6 +19,7 @@ import Footer from "./components/Footer";
 import Aboult from "./pages/Aboult";
 import NotFound from "./pages/NotFound";
 import CookieConset from "./components/CookieConset";
+import Anuncie from "./pages/Anuncie";
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/:id" element={<Casa />} />
           <Route path="/contato" element={<Contacts />} />
           <Route path="/sobre" element={<Aboult />} />
+          <Route path="/anuncie" element={<Anuncie />} />
           <Route path="/dashboard" element={!user ? <Login/> : <Dashboard />} />
           <Route path='/admLogin' element={!user ? <Login/> : <Navigate to="/dashboard"/>}/>
           <Route path="/create" element={!user? <Login/> : <CreateDoc/>} />

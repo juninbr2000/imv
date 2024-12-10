@@ -217,7 +217,7 @@ const Search = ({ onFilterChange }) => {
 
         <div className={styles.announce}>
           <h2>Quer anunciar seu imóvel?</h2>
-          <Link to={'https://wa.me/5535998990790'} className="secondary_btn">
+          <Link to={"/anuncie"} className="secondary_btn">
             Anunciar meu Imóvel
           </Link>
         </div>

@@ -19,19 +19,19 @@ const Footer = () => {
         <div className={styles.contact}>
             <Link to='/contato'>Contato <FaArrowRight/></Link>
             <Link to='/sobre'>Sobre Nós <FaArrowRight/></Link>
-            <Link to='https://wa.me/5535998990790'>Anuncie seu imóvel <FaArrowRight/></Link>
+            <Link to='/anuncie'>Anuncie seu imóvel <FaArrowRight/></Link>
             <p>Todas as imagens neste site foram publicadas com autorização dos proprietarios*</p>
         </div>
         <div className={styles.social}>
             <h3>Nossas Redes Sociais:</h3>
             <Link to='https://www.facebook.com/share/3FDMxtVPRnZD7dKJ/?mibextid=qi20mg' target='_blank'><FaFacebook/></Link>
-            <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F'><FaInstagram/></Link>
-            <Link to='https://youtube.com/@imoveisgentil'><FaYoutube/></Link>
+            <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F' target='_blank'><FaInstagram/></Link>
+            <Link to='https://youtube.com/@imoveisgentil' target='_blank'><FaYoutube/></Link>
             <Link to='https://t.me/Imoveisgentil' target='_blank'><FaTelegram/></Link>
         </div>
         <h4 className={styles.copy}>Imoveis-Gentil ©2024</h4>
         <div className={styles.credit}>
-            <p>Feito por <Link to='https://juninbr2000.github.io/portfolio/' target='_blanck' >&lt;Edson Junior/&gt;</Link></p>
+            <p>Feito por <Link to='https://juninbr2000.github.io/portfolio/' target='_blank' >&lt;Edson Junior/&gt;</Link></p>
         </div>
     </div>
   )
