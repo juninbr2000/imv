@@ -29,7 +29,7 @@ const Footer = () => {
             <Link to='https://youtube.com/@imoveisgentil' target='_blank'><FaYoutube/></Link>
             <Link to='https://t.me/Imoveisgentil' target='_blank'><FaTelegram/></Link>
         </div>
-        <h4 className={styles.copy}>Imoveis-Gentil ©2024</h4>
+        <h4 className={styles.copy}>Imoveis-Gentil ©2025</h4>
         <div className={styles.credit}>
             <p>Feito por <Link to='https://juninbr2000.github.io/portfolio/' target='_blank' >&lt;Edson Junior/&gt;</Link></p>
         </div>
