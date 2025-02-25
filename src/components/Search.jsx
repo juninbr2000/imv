@@ -46,7 +46,7 @@ const Search = ({ onFilterChange }) => {
         querySnapshot.docs.forEach(doc => {
           const data = doc.data();
           const city = data.city || 'Cidade Desconhecida';
-          const bairro = data.local || 'Bairro Desconhecido';
+          const bairro = data.local || '';
 
           if (city && bairro) {
             if (!cityBairrosMap.has(city)) {

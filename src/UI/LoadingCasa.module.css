@@ -1,0 +1,99 @@
+.Image{
+    height: 280px;
+    width: 100%;
+    max-width: 1024px;
+    border-radius: 0 0 20px 20px;
+    background-image: linear-gradient(65deg, #dddddd 40%, #d1d1d1 50%, #dddddd 60%);
+    background-position: left;
+    background-size: 280%;
+    animation: loading 1s infinite ease;
+}
+.content{
+    margin-top: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: #e4e4e4;
+    padding: 10px 25px;
+    box-shadow: 2px 1px 20px #5555553a;
+}
+
+.title{
+    display: block;
+    height: 33px;
+    background-image: linear-gradient(65deg, #c1c1c1 40%, #b0b0b0 50%, #c1c1c1 60%);
+    width: 100%;
+    border-radius: 10px;
+    background-position: left;
+    background-size: 280%;
+    margin-top: 20px;
+    animation: loading 1s infinite ease;
+}
+
+.value{
+    display: block;
+    height: 38px;
+    background-image: linear-gradient(65deg, #c1c1c1 40%, #b0b0b0 50%, #c1c1c1 60%);
+    width: 75%;
+    border-radius: 10px;
+    background-position: left;
+    background-size: 280%;
+    margin-top: 10px;
+    animation: loading 1s infinite ease;
+}
+
+.local{
+    display: block;
+    height: 25px;
+    background-image: linear-gradient(65deg, #c1c1c1 40%, #b0b0b0 50%, #c1c1c1 60%);
+    width: 75%;
+    border-radius: 10px;
+    background-position: left;
+    background-size: 280%;
+    margin: 15px auto;
+    animation: loading 1s infinite ease;
+}
+
+.items{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.item{
+    display: block;
+    height: 25px;
+    background-image: linear-gradient(65deg, #c1c1c1 40%, #b0b0b0 50%, #c1c1c1 60%);
+    width: 45%;
+    border-radius: 10px;
+    background-position: left;
+    background-size: 280%;
+    margin: 8px auto;
+    animation: loading 1s infinite ease;
+}
+.description{
+    display: block;
+    height: 125px;
+    background-image: linear-gradient(65deg, #c1c1c1 40%, #b0b0b0 50%, #c1c1c1 60%);
+    width: 100%;
+    border-radius: 10px;
+    background-position: left;
+    background-size: 280%;
+    margin: 15px auto;
+    animation: loading 1s infinite ease;
+}
+
+@media screen and (min-width: 788px){
+    .Image{
+        height: 450px;
+        max-width: 1024px;
+        margin: auto;
+    }
+}
+
+@keyframes loading {
+    0%{
+        background-position: right;
+    }
+    100%{
+        background-position: left;
+    }
+}

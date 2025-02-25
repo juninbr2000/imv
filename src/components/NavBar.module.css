@@ -28,6 +28,7 @@
     top: 106px;
     left: 0;
     z-index: 5;
+    animation: menuInOut .5s 1 ease-in-out;
     & ul{
         list-style: none;
         padding: 0px 10px;
@@ -92,6 +93,7 @@ li a{
         top: 0;
         left: 0;
         width: 80%;
+        animation: none;
         & ul{
             flex-direction: row;
             padding: 0;
@@ -127,5 +129,14 @@ li a{
         background-color: transparent;
         cursor: pointer;
         transition: all .3s ease;
+    }
+}
+
+@keyframes menuInOut {
+    0%{
+        top: -500px;
+    }
+    100%{
+        top: 106px
     }
 }

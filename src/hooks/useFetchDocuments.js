@@ -12,14 +12,11 @@ import {
 export const useFetchDocuments = (docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city) => {
     const [documents, setDocuments] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [hasMore, setHasMore] = useState(true);
-
-    const [cancelled, setCancelled] = useState(false);
 
     useEffect(() => {
         async function loadData() {
-            if (cancelled) return;
 
             setLoading(true);
             const collectionRef = await collection(db, docCollection);
@@ -53,18 +50,33 @@ export const useFetchDocuments = (docCollection, aluguel, location, venda, tipoI
                 }
                 orderConditions.push(orderBy('createDat', 'desc')); // Ordena pela data de criação
 
-                const q = query(collectionRef, ...conditions, ...orderConditions, limit(itemsPerPage));
+                if(conditions.length > 0){
+                    const q = query(collectionRef, ...conditions, ...orderConditions, limit(itemsPerPage)); 
 
-                // Executando a consulta e atualizando o estado
-                await onSnapshot(q, (querySnapshot) => {
-                    setDocuments(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-                    setHasMore(querySnapshot.docs.length === itemsPerPage);
-                });
+                    await onSnapshot(q, (querySnapshot) => {
+                        setDocuments(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+                        setHasMore(querySnapshot.docs.length === itemsPerPage);
+                    });
 
-                setLoading(false);
+                    setLoading(true)
+                } else {
+                    const q = query(collectionRef, ...orderConditions, limit(itemsPerPage)) 
+                    
+                    await onSnapshot(q, (querySnapshot) => {
+                        setDocuments(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+                        setHasMore(querySnapshot.docs.length === itemsPerPage);
+                    });
+
+                    setLoading(true)
+                }
+
             } catch (error) {
                 setError(error.message);
                 setLoading(false);
+            }
+
+            if( documents.length > 0){
+                setLoading(false)
             }
         }
 
@@ -72,6 +84,12 @@ export const useFetchDocuments = (docCollection, aluguel, location, venda, tipoI
 
         // return () => setCancelled(true);
     }, [docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city]);
+
+    useEffect(() => {
+        if( documents.length > 0 ){
+            setLoading(false)
+        }
+    }, [documents]);
 
     return { documents, loading, hasMore, error };
 };
