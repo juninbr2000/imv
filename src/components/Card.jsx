@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaCamera, FaCar, FaWater, FaCouch, FaBed, FaShower, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaPlus, FaCrown } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
 import { BiSolidWasher } from 'react-icons/bi'
@@ -32,7 +32,7 @@ const Card = ({ venda }) => {
   return (
     <div className={styles.card_container} onClick={() => navigate(`/${venda.id}`)}>
         <div className={styles.card_images}>
-            {venda.imagens !== undefined ? <img src={venda.imagens[0]} alt="" /> : <div className={styles.noPic}><FaCamera/></div>}
+            {venda.imagens !== undefined ? <img src={venda.imagens[0]} alt="" loading="lazy" width={280} /> : <div className={styles.noPic}><FaCamera/></div>}
             {s - tempototal <= tresdias && <div className={styles.tag}><p><FaPlus/>Novo</p></div>}
             {venda.exclusive && <div className={styles.tag}><p><FaCrown/> Exclusivo</p></div>}
         </div>

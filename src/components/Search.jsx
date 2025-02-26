@@ -18,6 +18,7 @@ const Search = ({ onFilterChange }) => {
   const [filteredBairros, setFilteredBairros] = useState([]);
   const [listCity, setListCity] = useState([]);
   const [cityBairrosMap, setCityBairrosMap] = useState(new Map());
+  const [loading, setLoading] = useState(false)
 
   const saleValue = [
     { value: 100000, text: 'até R$ 100.000,00' },
@@ -39,6 +40,7 @@ const Search = ({ onFilterChange }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
         const querySnapshot = await getDocs(collection(db, 'venda'));
         const cityBairrosMap = new Map();
@@ -66,8 +68,11 @@ const Search = ({ onFilterChange }) => {
         const allTypes = querySnapshot.docs.map(doc => doc.data().tipo);
         const uniqueTypes = [...new Set(allTypes)];
         setTipos(uniqueTypes);
+
+        setLoading(false)
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
+        setLoading(false)
       }
     };
 
@@ -141,20 +146,30 @@ const Search = ({ onFilterChange }) => {
               <span>
                 <BiCurrentLocation /> Cidade
               </span>
-              <select name="city" onChange={(e) => setCity(e.target.value)} value={city}>
+              {loading ? (
+                <div className={styles.loadingSelect}>
+                  <p>Selecione</p>
+                  <p>˅</p>
+                </div>
+              ) : <select name="city" onChange={(e) => setCity(e.target.value)} value={city}>
                 <option value="">Selecione</option>
                 {listCity.map((cidade, index) => (
                   <option key={index} value={cidade}>
                     {cidade}
                   </option>
                 ))}
-              </select>
+              </select>}
             </label>
             <label className={styles.select}>
               <span>
                 <FaRegMap /> Localização
               </span>
-              <select
+              {loading ? (
+                <div className={styles.loadingSelect}>
+                  <p>Todas</p>
+                  <p>˅</p>
+                </div>
+              ) : <select
                 name="bairro"
                 onChange={(e) => setLocal(e.target.value)}
                 value={local}
@@ -166,7 +181,7 @@ const Search = ({ onFilterChange }) => {
                     {bairro}
                   </option>
                 ))}
-              </select>
+              </select>}
             </label>
           </div>
           <div className={styles.select_area}>

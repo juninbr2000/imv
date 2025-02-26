@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Search from '../components/Search';
 import { useFetchDocuments } from '../hooks/useFetchDocuments';
 import Card from '../components/Card';
@@ -16,12 +16,16 @@ const Home = () => {
     const [city, setCity] = useState('')
     const [firstLoad, setFirstLoad] = useState(true);
 
-    const [itemsPerPage, setItemsPerPage] = useState(15);
+    const [itemsPerPage, setItemsPerPage] = useState(12);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", aluguel, location, sale, tipo, parseFloat(cost), itemsPerPage, city); //voltar para venda
+    const filterParams = useMemo(() => ({
+        aluguel, location, sale, tipo, cost: parseFloat(cost) || 0, city
+    }), [aluguel, location, sale, tipo, cost, city]);
 
-    const handleFilterChange = (isAluguel, selectedLocation, isSale, tipoImv, maxCost, city) => {
+    const { documents: venda, loading, hasMore } = useFetchDocuments("venda", filterParams, itemsPerPage);
+
+    const handleFilterChange = useCallback((isAluguel, selectedLocation, isSale, tipoImv, maxCost, city) => {
         setAluguel(isAluguel);
         setLocation(selectedLocation);
         setSale(isSale);
@@ -38,7 +42,7 @@ const Home = () => {
         if (city) params.set("city", city);
 
         setSearchParams(params);
-    };
+    });
 
     const handleRemoveCity = () => {
         setCity("");
@@ -94,7 +98,7 @@ const Home = () => {
 
 
     const loadMore = () => {
-        setItemsPerPage(itemsPerPage + 10)
+        setItemsPerPage(prev => prev + 10)
     }    
 
     return (
@@ -118,6 +122,15 @@ const Home = () => {
                 <div className='card-area'>
                     {loading || firstLoad ? (
                         <>
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
+                            <LoadingCard />
                             <LoadingCard />
                             <LoadingCard />
                             <LoadingCard />

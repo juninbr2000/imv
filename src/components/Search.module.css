@@ -1,5 +1,5 @@
 .form_container{
-    background-image: url('../assets/webaliser-_TPTXZd9mOo-unsplash.jpg');
+    /* background-image: url('../assets/webaliser-_TPTXZd9mOo-unsplash.jpg'); */
     min-height: 60vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #192436e7;
+    background-color: #192436;
     height: 100%;
     width: 100%;
     padding: 40px 0;
@@ -118,6 +118,19 @@
         margin: 0;
     }
 }
+
+.loadingSelect{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border: 1px solid;
+    color: #797979;
+    border-radius: 20px;
+    padding: 3px 3px 3px 9px;
+    background: #ffffff;
+}
+
+
 @media screen and (min-width: 850px) {
     .form_container{
         max-width: 1024px;

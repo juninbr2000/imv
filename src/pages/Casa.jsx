@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useFetchDocument } from '../hooks/useFetchDocument';
 import { getRecomendations } from '../hooks/useFetchRecomendations'
 
-import { FaCamera, FaCar, FaWater, FaCouch, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaImage, FaVideo, FaVideoSlash } from 'react-icons/fa';
+import { FaCar, FaWater, FaCouch, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaImage, FaVideo, FaVideoSlash } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
 import { BiSolidWasher } from 'react-icons/bi'
 
@@ -89,7 +89,7 @@ const Casa = () => {
     }
 
     if(!venda && loading === false){
-      navigate('/not-found')
+      navigate('*')
     }
 
     const getEmbedUrl = (url) => {

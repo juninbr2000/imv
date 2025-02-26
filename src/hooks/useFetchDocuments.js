@@ -9,7 +9,8 @@ import {
     limit,
 } from "firebase/firestore";
 
-export const useFetchDocuments = (docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city) => {
+export const useFetchDocuments = (docCollection, filters, itemsPerPage) => {
+    const { aluguel, location, venda, tipoImv, cost, city } = filters;
     const [documents, setDocuments] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
