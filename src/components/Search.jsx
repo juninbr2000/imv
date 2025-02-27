@@ -148,7 +148,7 @@ const Search = ({ onFilterChange }) => {
               </span>
               {loading ? (
                 <div className={styles.loadingSelect}>
-                  <p>Selecione</p>
+                  <p>Carregando...</p>
                   <p>˅</p>
                 </div>
               ) : <select name="city" onChange={(e) => setCity(e.target.value)} value={city}>
@@ -166,7 +166,7 @@ const Search = ({ onFilterChange }) => {
               </span>
               {loading ? (
                 <div className={styles.loadingSelect}>
-                  <p>Todas</p>
+                  <p>Carregando...</p>
                   <p>˅</p>
                 </div>
               ) : <select
@@ -189,7 +189,7 @@ const Search = ({ onFilterChange }) => {
               <span>
                 <BiBuildingHouse /> Tipo
               </span>
-              <select name="tipo" onChange={(e) => setTipoImv(e.target.value)}>
+              <select name="tipo" value={tipoImv} onChange={(e) => setTipoImv(e.target.value)}>
                 <option value="">Todos</option>
                 {tipos.map((tipo, index) => (
                   <option key={index} value={tipo}>
@@ -231,7 +231,7 @@ const Search = ({ onFilterChange }) => {
         </form>
 
         <div className={styles.announce}>
-          <h2>Quer anunciar seu imóvel?</h2>
+          <h3>Quer anunciar seu imóvel?</h3>
           <Link to={"/anuncie"} className="secondary_btn">
             Anunciar meu Imóvel
           </Link>

@@ -31,11 +31,12 @@
 .value {
     display: block;
     width: 70%;
-    height: 32px;
+    height: 30px;
     background-image: linear-gradient(65deg, #dddddd 40%, #d1d1d1 50%, #dddddd 60%);
     background-position: left;
     background-size: 280%;
     border-radius: 10px;
+    margin-top: 5px;
     animation: loading 1s infinite ease;
 }
 
@@ -58,17 +59,30 @@
     justify-content: center;
     height: 50px;
     width: 100%;
-    margin-top: 10px;
-    gap: 8px;
+    margin-top: 7px;
+    gap: 1px;
 }
 .item{
     background-image: linear-gradient(65deg, #dddddd 40%, #d1d1d1 50%, #dddddd 60%);
     background-position: left;
     background-size: 280%;
     width: 40%;
-    height: 22px;
+    height: 18px;
     display: block;
     border-radius: 5px;
+    margin-right: 15px;
+    animation: loading 1s infinite ease;
+}
+
+.loading_btn{
+    background-image: linear-gradient(65deg, #343b46 40%, #474f5c 50%, #343b46 60%);
+    background-position: left;
+    background-size: 280%;
+    display: block;
+    height: 38px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
     animation: loading 1s infinite ease;
 }
 

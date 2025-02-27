@@ -20,7 +20,7 @@ const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const filterParams = useMemo(() => ({
-        aluguel, location, sale, tipo, cost: parseFloat(cost) || 0, city
+        aluguel, location, sale, tipo, cost: parseFloat(cost) || 0, city,
     }), [aluguel, location, sale, tipo, cost, city]);
 
     const { documents: venda, loading, hasMore } = useFetchDocuments("venda", filterParams, itemsPerPage);
@@ -44,41 +44,38 @@ const Home = () => {
         setSearchParams(params);
     });
 
-    const handleRemoveCity = () => {
-        setCity("");
-        searchParams.delete("city");
-        setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+    const handleSearchParms = (type) => {
+        if(type === city){
+            setCity("");
+            searchParams.delete("city");
+            setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+        }
+        if(type === cost){
+            setCost("");
+            searchParams.delete("cost");
+            setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+        }
+        if(type === sale){
+            setSale(false);
+            searchParams.delete("sale");
+            setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+        }
+        if(type === aluguel){
+            setAluguel(false);
+            searchParams.delete("aluguel");
+            setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+        }
+        if(type === location){
+            setLocation("");
+            searchParams.delete("location");
+            setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+        }
+        if(type === tipo){
+            setTipo("");
+            searchParams.delete("tipo");
+            setSearchParams(searchParams); // Atualiza a URL removendo o parâmetro
+        }
     };
-
-    const handleRemoveSale = () => {
-        setSale(false);
-        searchParams.delete("sale");
-        setSearchParams(searchParams);
-    };
-
-    const handleRemoveAluguel = () => {
-        setAluguel(false);
-        searchParams.delete('aluguel')
-        setSearchParams(searchParams)
-    }
-    //location, type, cost
-    const handleRemoveLocation = () => {
-        setLocation('');
-        searchParams.delete('location');
-        setSearchParams(searchParams)
-    }
-
-    const handleRemoveType = () => {
-        setTipo('')
-        searchParams.delete('tipo');
-        setSearchParams(searchParams)
-    }
-
-    const handleRemoveCost = () => {
-        setCost('')
-        searchParams.delete('cost')
-        setSearchParams(searchParams)
-    }
 
     useEffect(() => {
         // Sincroniza o estado dos filtros com a URL ao carregar a página
@@ -98,7 +95,7 @@ const Home = () => {
 
 
     const loadMore = () => {
-        setItemsPerPage(prev => prev + 10)
+        setItemsPerPage(prev => prev + 12)
     }    
 
     return (
@@ -112,25 +109,16 @@ const Home = () => {
             <section className='cards'>
                 <h1 className='section-title'>Principais Resultados</h1>
                 <div className='filter_container'>
-                    {city !== "" && <p className='filter' onClick={() => handleRemoveCity()}>{city} <FaPlus/></p>}
-                    {sale === true && <p className='filter' onClick={() => handleRemoveSale()}>Venda <FaPlus/></p>}
-                    {aluguel === true && <p className='filter' onClick={() => handleRemoveAluguel()}>Aluguel <FaPlus/></p>}
-                    {location !== '' && <p className='filter' onClick={() => handleRemoveLocation()}> {location} <FaPlus/></p>}
-                    {tipo !== '' && <p className='filter' onClick={() => handleRemoveType()}> {tipo} <FaPlus/></p>}
-                    {cost !== '' && <p className='filter' onClick={() => handleRemoveCost()}>Até {parseFloat(cost).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} <FaPlus/></p>}
+                    {city !== "" && <p className='filter' onClick={() => handleSearchParms(city)}>{city} <FaPlus/></p>}
+                    {sale === true && <p className='filter' onClick={() => handleSearchParms(sale)}>Venda <FaPlus/></p>}
+                    {aluguel === true && <p className='filter' onClick={() => handleSearchParms(aluguel)}>Aluguel <FaPlus/></p>}
+                    {location !== '' && <p className='filter' onClick={() => handleSearchParms(location)}> {location} <FaPlus/></p>}
+                    {tipo !== '' && <p className='filter' onClick={() => handleSearchParms(tipo)}> {tipo} <FaPlus/></p>}
+                    {cost !== '' && <p className='filter' onClick={() => handleSearchParms(cost)}>Até {parseFloat(cost).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} <FaPlus/></p>}
                 </div>
                 <div className='card-area'>
                     {loading || firstLoad ? (
                         <>
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
-                            <LoadingCard />
                             <LoadingCard />
                             <LoadingCard />
                             <LoadingCard />
@@ -143,11 +131,15 @@ const Home = () => {
                     }
                 </div>
                 <div className='pagination'>
-                    {hasMore === true ? 
+                    {!loading && hasMore === true ? 
                     <button onClick={loadMore}>Carregar Mais Propriedades</button>
-                    :
-                    <p>Exibindo todos os {venda.length} imóveis</p>
-                    }
+                    : (
+                        loading ? (
+                            <p>Carregando ...</p>
+                        ) : (
+                            <p>Exibindo todos os {venda.length} imóveis</p>
+                        )
+                    )}
                 </div>
             </section>
             <Analytics />

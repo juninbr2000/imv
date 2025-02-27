@@ -24,10 +24,10 @@ const Footer = () => {
         </div>
         <div className={styles.social}>
             <h3>Nossas Redes Sociais:</h3>
-            <Link to='https://www.facebook.com/share/3FDMxtVPRnZD7dKJ/?mibextid=qi20mg' target='_blank'><FaFacebook/></Link>
-            <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F' target='_blank'><FaInstagram/></Link>
-            <Link to='https://youtube.com/@imoveisgentil' target='_blank'><FaYoutube/></Link>
-            <Link to='https://t.me/Imoveisgentil' target='_blank'><FaTelegram/></Link>
+            <Link to='https://www.facebook.com/share/3FDMxtVPRnZD7dKJ/?mibextid=qi20mg' target='_blank' aria-label='facebook'><FaFacebook/></Link>
+            <Link to='https://www.instagram.com/imoveis.gentil/?next=%2F' target='_blank' aria-label='instagram'><FaInstagram/></Link>
+            <Link to='https://youtube.com/@imoveisgentil' target='_blank' aria-label='youtube'><FaYoutube/></Link>
+            <Link to='https://t.me/Imoveisgentil' target='_blank' aria-label='telegram'><FaTelegram/></Link>
         </div>
         <h4 className={styles.copy}>Imoveis-Gentil ©2025</h4>
         <div className={styles.credit}>

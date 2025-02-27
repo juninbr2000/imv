@@ -9,7 +9,7 @@ body{
 }
 .primary_btn{
   padding: 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: #192436;
   color: #C5AD69;
   border: none;
@@ -95,45 +95,66 @@ body{
   }
 }
 
-.spinner {
-  width: 60px;
-  height: 60px;
-  margin: calc(100vh / 2 - 50px) auto;
-  position: relative;
+.loading_container{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  gap: 30px;
+}
+.logo{
+  transform: scale(2);
+}
+
+ /* From Uiverse.io by barisdogansutcu */ 
+.loading {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
 }
  
-.spinner .dot {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-}
+.loading circle {
+  fill: none;
+  stroke: #0c121c;
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+ }
  
-.spinner .dot::after {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #192436;
-}
- 
-@keyframes spin {
-  to {
-   transform: rotateY(360deg);
+ @keyframes rotate4 {
+  100% {
+   transform: rotate(360deg);
   }
-}
-.spinner svg{
-  animation: spin 1s linear infinite;
-}
+ }
+ 
+ @keyframes dash4 {
+  0% {
+   stroke-dasharray: 1, 200;
+   stroke-dashoffset: 0;
+  }
+ 
+  50% {
+   stroke-dasharray: 90, 200;
+   stroke-dashoffset: -35px;
+  }
+ 
+  100% {
+   stroke-dashoffset: -125px;
+  }
+ }
+ 
+
 
 .pagination{
   display: flex;
   align-items: center;
   gap: 10px;
   justify-content: center;
+  padding: 5px;
   & button{
     padding: 10px 15px;
     border-radius: 10px;

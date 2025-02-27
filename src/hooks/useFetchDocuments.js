@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 
 export const useFetchDocuments = (docCollection, filters, itemsPerPage) => {
-    const { aluguel, location, venda, tipoImv, cost, city } = filters;
+    const { aluguel, location, venda, tipo, cost, city } = filters;
     const [documents, setDocuments] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -38,8 +38,8 @@ export const useFetchDocuments = (docCollection, filters, itemsPerPage) => {
                 if (location) {
                     conditions.push(where('local', '==', location));
                 }
-                if (tipoImv) {
-                    conditions.push(where('tipo', '==', tipoImv));
+                if (tipo) {
+                    conditions.push(where('tipo', '==', tipo));
                 }
                 if (cost) {
                     conditions.push(where('valor', '<=', cost));
@@ -84,7 +84,7 @@ export const useFetchDocuments = (docCollection, filters, itemsPerPage) => {
         loadData();
 
         // return () => setCancelled(true);
-    }, [docCollection, aluguel, location, venda, tipoImv, cost, itemsPerPage, city]);
+    }, [docCollection, aluguel, location, venda, tipo, cost, itemsPerPage, city]);
 
     useEffect(() => {
         if( documents.length > 0 ){

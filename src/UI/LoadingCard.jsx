@@ -14,6 +14,7 @@ const LoadingCard = () => {
                 <span className={styles.item}></span>
                 <span className={styles.item}></span>
             </div>
+            <p className={styles.loading_btn}></p>
         </div>
     </div>
   )
