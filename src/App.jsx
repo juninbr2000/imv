@@ -30,7 +30,7 @@ function App() {
   // const loadingUser = user === undefined
 
   useEffect(() => {
-
+    console.log(user)
     onAuthStateChanged(auth, (user) => {
       setUser(user)
     })

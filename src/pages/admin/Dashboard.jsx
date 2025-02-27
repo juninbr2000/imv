@@ -21,7 +21,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
     
     const { deleteDocument, response } = useDeleteDocument(collectionType)
-    const { documents: venda, loading } = useFetchDocuments(collectionType)
+    const { documents: venda, loading } = useFetchDocuments(collectionType, [])
 
     const handleMarkAsSold = async (imovel) => {
       try {
@@ -39,8 +39,9 @@ const Dashboard = () => {
       const apaga = window.confirm(`Tem certeza que quer remover ${titulo}? Essa ação não poderá ser desfeita.`);
       if (apaga) {
         deleteDocument(id, imagens)
-        setAlert('Imovel deletado com sucesso')
+        setAlert('Imovel deletado com sucesso', response)
       } else {
+        setAlert('Erro ao apagar o Documento', response)
         return
       }
     }
