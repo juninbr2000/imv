@@ -169,7 +169,7 @@ const CreateDoc = () => {
                   <option value="Residencia">Residência</option>
                   <option value="Apartamento">Apartamento</option>
                   <option value="Terreno">Terreno</option>
-                  <option value="Galpao">Galpão</option>
+                  <option value="Galpão">Galpão</option>
                   <option value="Fazenda">Fazenda</option>
                   <option value="Sitio">Sítio</option>
                   <option value="Ponto Comercial">Ponto Comercial</option>
