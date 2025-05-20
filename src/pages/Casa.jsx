@@ -12,15 +12,13 @@ import styles from './Casa.module.css'
 import WhatsappBtn from '../components/WhatsappBtn';
 import Card from '../components/Card';
 import LoadingCasa from '../UI/LoadingCasa';
+import MidiaControl from '../components/MidiaControl';
 
 const Casa = () => {
 
     const { id } = useParams();
     const { document: venda , loading} = useFetchDocument("venda", id) 
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [videoSelected, setVideoSelected] = useState(false)
     const navigate = useNavigate()
-    const [embedUrl, setEmbedUrl] = useState('')
     const [recomendado, setRecomendado] = useState([])
     const [carac, setCarac] = useState([])
     const iconMap = {
@@ -41,17 +39,12 @@ const Casa = () => {
       window.scrollTo(0, 0)
 
       setCarac([])
-      setCurrentIndex(0)
       setRecomendado([])
 
       if(venda){
-        if(venda.video){
-          setEmbedUrl(getEmbedUrl(venda.video))
-        }
 
         //altera as meta tags para facilitar buscas por mecanismos
         setCarac(venda.caracteristicas || [])
-        setVideoSelected(false)
         document.title = `${venda.venda === true ? 'Vende-se ': 'Aluga-se '}${venda.titulo} | Imóveis Gentil`
 
         const MetaDescription = document.querySelector('meta[name="description"]')
@@ -78,68 +71,14 @@ const Casa = () => {
         return <LoadingCasa />
     }
 
-    const nextImage = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % venda.imagens.length)
-    }
-    
-    const prevImage = () => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? venda.imagens.length - 1 : prevIndex - 1
-      )
-    }
-
     if(!venda && loading === false){
       navigate('*')
     }
-
-    const getEmbedUrl = (url) => {
-      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/);
-      return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-    };
     
-    // if(!loading){
-    //   window.scrollTo(0, 0)
-    // }
-
   return (
     <div>
         {venda && <div className={styles.casa_container}>
-          <div className={styles.imagens_container}>
-            {venda.imagens !== undefined && !videoSelected ? 
-              <img src={venda.imagens[currentIndex]} alt="" />
-              :
-              <div className={styles.noPic}>
-                <iframe width="560" height="315" 
-                  src={`${embedUrl}?autoplay=1&mute=1&rel=0`} 
-                  title="YouTube video player" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  referrerPolicy="strict-origin-when-cross-origin" 
-                  allowFullScreen>
-                </iframe>
-              </div>
-            }
-            <div className={styles.change_image}>
-              {venda.imagens !== undefined && !videoSelected && venda.imagens.map((imagem, index)=> <label  className={styles.image_label} key={index}>
-                <input type='radio' name='images' value={index} checked={index === currentIndex} onChange={() => setCurrentIndex(index)}/>
-                <span></span>
-                </label>)}
-                {venda.imagens !== undefined &&!videoSelected && <div className={styles.control}>
-                  <button onClick={() => prevImage()}><FaArrowLeft/></button>
-                  <button onClick={() => nextImage()}><FaArrowRight/></button>
-                </div>}
-                {venda.video ? <div className={styles.midiaControl}>
-                  <button onClick={() => setVideoSelected(false)} className={styles.btnImageVideo}><FaImage/>{venda.imagens.length} Fotos</button>
-                  <button onClick={() => setVideoSelected(true)}className={styles.btnImageVideo}><FaVideo/> Video</button>
-                </div>
-                :
-                <div className={styles.midiaControl}>
-                  <button onClick={() => setVideoSelected(false)} className={styles.btnImageVideo}><FaImage/> {venda.imagens.length} Fotos</button>
-                  <button className={styles.btnImageVideo} disabled><FaVideoSlash/> Video</button>
-                </div>
-                }
-            </div>
-          </div>   
+          <MidiaControl imagens={venda.imagens} video={venda.video} />
           <div className={styles.casa_info_cont}>
             <h2 className={styles.title}>{venda.titulo}</h2>
               
