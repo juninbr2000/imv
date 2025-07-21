@@ -24,12 +24,12 @@ const Contacts = () => {
           <div className={styles.card}>
             <h2>Nosso Email</h2>
             <p>Você pode entrar em contato conosco pelo nosso email</p>
-            <p className={styles.destaque}><FaEnvelope/> imoveisgentil.mg@gmail.com</p>
+            <Link className={styles.destaque} to={`mailto:imoveisgentil.mg@gmail.com`}><FaEnvelope/> imoveisgentil.mg@gmail.com &gt;</Link>
           </div>
           <div className={styles.card}>
             <h2>Nosso Telefone</h2>
             <p>Caso prefira, você tambem pode nos contatar pelo nosso Telefone</p>
-            <p className={styles.destaque}><FaPhone/> +55 35 9 9899-0790</p>
+            <Link className={styles.destaque} to={"tel:+5535998990790"}><FaPhone/> +55 35 9 9899-0790</Link>
           </div>
           <div className={styles.card}>
             <h2>Nosso Whatsapp</h2>
