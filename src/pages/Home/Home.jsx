@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import Search from '../components/Search';
-import { useFetchDocuments } from '../hooks/useFetchDocuments';
-import Card from '../components/Card';
+import Search from '../../components/Search';
+import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import Card from '../../components/Card';
 import { FaPlus } from 'react-icons/fa';
 import { Analytics } from "@vercel/analytics/react"
 import { useSearchParams } from 'react-router-dom';
-import LoadingCard from '../UI/LoadingCard';
+import LoadingCard from '../../UI/LoadingCard';
+import WhatsappBtn from '../../components/WhatsappBtn';
 
 const Home = () => {
     const [aluguel, setAluguel] = useState(false);
@@ -142,6 +143,7 @@ const Home = () => {
                     )}
                 </div>
             </section>
+            <WhatsappBtn />
             <Analytics />
         </div>
     );

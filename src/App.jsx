@@ -7,19 +7,19 @@ import { AuthProvider } from "./context/AuthContext";
 
 import { useAuthentication } from './hooks/useAuthentication';
 
-import NavBar from "./components/NavBar"
-import Home from "./pages/Home"
-import Casa from "./pages/Casa"
-import Dashboard from "./pages/admin/Dashboard"
-import Login from "./pages/admin/Login"
-import CreateDoc from "./pages/admin/CreateDoc";
-import Contacts from "./pages/Contacts";
-import EditDoc from "./pages/admin/EditDoc";
-import Footer from "./components/Footer";
-import Aboult from "./pages/Aboult";
-import NotFound from "./pages/NotFound";
-import CookieConset from "./components/CookieConset";
-import Anuncie from "./pages/Anuncie";
+import NavBar from "./components/layout/NavBar"
+import Home from "./pages/Home/Home"
+import Casa from "./pages/Casa/Casa"
+import Dashboard from "./pages/admin/Dashboard/Dashboard"
+import Login from "./pages/admin/Login/Login"
+import CreateDoc from "./pages/admin/CreateDoc/CreateDoc";
+import Contacts from "./pages/Contacts/Contacts";
+import EditDoc from "./pages/admin/EditDoc/EditDoc";
+import Footer from "./components/layout/Footer";
+import Aboult from "./pages/Aboult/Aboult";
+import NotFound from "./pages/NotFound/NotFound";
+import CookieConset from "./components/layout/CookieConsent";
+import Anuncie from "./pages/Anuncie/Anuncie";
 
 function App() {
 

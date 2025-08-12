@@ -1,18 +1,18 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
 
-import { useFetchDocument } from '../hooks/useFetchDocument';
-import { getRecomendations } from '../hooks/useFetchRecomendations'
+import { useFetchDocument } from '../../hooks/useFetchDocument';
+import { getRecomendations } from '../../hooks/useFetchRecomendations'
 
 import { FaCar, FaWater, FaCouch, FaPhone, FaEnvelope, FaBed, FaShower, FaArrowLeft, FaArrowRight, FaTv, FaGlassMartini, FaUtensils, FaUmbrellaBeach, FaTree, FaImage, FaVideo, FaVideoSlash } from 'react-icons/fa';
 import { BsArrowsAngleExpand } from 'react-icons/bs'
 import { BiSolidWasher } from 'react-icons/bi'
 
 import styles from './Casa.module.css'
-import WhatsappBtn from '../components/WhatsappBtn';
-import Card from '../components/Card';
-import LoadingCasa from '../UI/LoadingCasa';
-import MidiaControl from '../components/MidiaControl';
+import WhatsappBtn from '../../components/WhatsappBtn';
+import Card from '../../components/Card';
+import LoadingCasa from '../../UI/LoadingCasa';
+import MidiaControl from '../../components/Media/MediaControl';
 
 const Casa = () => {
 
@@ -45,7 +45,7 @@ const Casa = () => {
 
         //altera as meta tags para facilitar buscas por mecanismos
         setCarac(venda.caracteristicas || [])
-        document.title = `${venda.venda === true ? 'Vende-se ': 'Aluga-se '}${venda.titulo} | Imóveis Gentil`
+        document.title = `${venda.venda === true ? 'Vende-se ': 'Aluga-se '}${venda.titulo} | Luiza Gentil Corretora de Imóveis`
 
         const MetaDescription = document.querySelector('meta[name="description"]')
         if(MetaDescription) {

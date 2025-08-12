@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useAuthValue } from '../../context/AuthContext'
-import { useFetchDocuments } from '../../hooks/useFetchDocuments'
-import { useDeleteDocument } from '../../hooks/useDeleteDocuments'
+import { useAuthValue } from '../../../context/AuthContext'
+import { useFetchDocuments } from '../../../hooks/useFetchDocuments'
+import { useDeleteDocument } from '../../../hooks/useDeleteDocuments'
 
 import { FaCamera, FaTrashAlt, FaPenAlt, FaMoneyCheckAlt } from 'react-icons/fa'
 import styles from './Dashboard.module.css'
 import { getDocs, collection, setDoc, deleteDoc, doc } from 'firebase/firestore'
-import { db } from '../../firebase/config';
+import { db } from '../../../firebase/config';
 
 const Dashboard = () => {
     const { user } = useAuthValue()
@@ -32,6 +32,17 @@ const Dashboard = () => {
       } catch (error) {
         console.error("Erro ao mover o imóvel para vendidos:", error);
         setAlert('Erro ao mover para Vendidos: ', error)
+      }
+    }
+    const handleresold = async (imovel) => {
+      try {
+        await setDoc(doc(db, "venda", imovel.id), imovel);
+        await deleteDoc(doc(db, "vendidos", imovel.id));
+
+        setAlert(`${imovel.titulo} foi listado novamente`);
+      } catch (error) {
+        console.error("Erro ao mover o imóvel para venda:", error);
+        setAlert('Erro ao mover para venda: ', error)
       }
     }
 
@@ -159,6 +170,9 @@ const Dashboard = () => {
                 <button className={styles.delete_btn} onClick={() => handleDelete(casa.id, casa.titulo, casa.imagens)}><FaTrashAlt /></button>
                 {collectionType === 'venda' && (
                   <button className={styles.sell_btn} onClick={() => handleMarkAsSold(casa)}><FaMoneyCheckAlt /></button>
+                )}
+                {collectionType === 'vendidos' && (
+                  <button className={styles.sell_btn} onClick={() => handleresold(casa)}><FaMoneyCheckAlt /></button>
                 )}
               </div>
             </div>

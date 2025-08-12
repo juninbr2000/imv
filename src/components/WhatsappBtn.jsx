@@ -5,13 +5,20 @@ import styles from './WhatsappBtn.module.css'
 
 const WhatsappBtn = ({mensagem}) => {
 
-    const configMSG = mensagem.replace( / /g , '%20')
-
-  return (
-    <Link to={`https://wa.me/5535998990790?text=${configMSG}`} target='_blank' className={styles.stlBtn}>
+  if(mensagem){
+    const configMSG = mensagem.replace(/ /g, '%20')
+    return (
+      <Link to={`https://wa.me/5535998990790?text=${configMSG}`} text='Agendar por whatsapp' target='_blank' className={styles.stlBtn}>
+          <FaWhatsapp/>
+      </Link>
+    )
+  } else {  
+    return (
+      <Link to={`https://wa.me/5535998990790`} target='_blank' text="Converse com a gente" className={styles.stlBtn}>
         <FaWhatsapp/>
     </Link>
   )
+  }
 }
 
 export default WhatsappBtn

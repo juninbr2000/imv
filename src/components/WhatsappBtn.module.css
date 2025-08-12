@@ -23,7 +23,7 @@
     height: 30px;
 }
 .stlBtn:hover::after{
-    content: 'agendar por Whatsapp';
+    content: attr(text);
     text-decoration: none;
     margin-left: 20px;
     color: #fff;

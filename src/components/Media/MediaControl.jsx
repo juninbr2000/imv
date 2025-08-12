@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../pages/Casa.module.css'
+import styles from '../../pages/Casa/Casa.module.css'
 import { FaArrowLeft, FaArrowRight, FaImage, FaVideoSlash, FaVideo, FaExpand, FaCompress } from 'react-icons/fa'
 
-function MidiaControl({imagens, video}) {
+function MediaControl({imagens, video}) {
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const [videoSelected, setVideoSelected] = useState(false)
@@ -84,4 +84,4 @@ function MidiaControl({imagens, video}) {
     )
 }
 
-export default MidiaControl
+export default MediaControl
