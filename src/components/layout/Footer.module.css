@@ -6,8 +6,12 @@
 .logo_info{
     display: flex;
     color: #818181;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 15px;
+    & svg {
+        margin-right: 20px;
+    }
 }
 .contact{
     margin-top: 40px;
