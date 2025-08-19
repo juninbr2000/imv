@@ -80,10 +80,10 @@ const Casa = () => {
         {venda && <div className={styles.casa_container}>
           <MidiaControl imagens={venda.imagens} video={venda.video} />
           <div className={styles.casa_info_cont}>
-            <h2 className={styles.title}>{venda.titulo}</h2>
+            <h1 className={styles.title}>{venda.titulo}</h1>
               
             <div className='price'>
-              <h1>{venda.valor.toLocaleString("pt-br", {style: 'currency', currency: 'BRL'})}</h1>
+              <h2>{venda.valor.toLocaleString("pt-br", {style: 'currency', currency: 'BRL'})}</h2>
               {venda.aluguel && <p className='aluguel'>/ Mês</p>}
             </div>
             {venda.endereco ? <p className={styles.address}><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
