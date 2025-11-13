@@ -59,9 +59,9 @@ const Casa = () => {
 
         return () => {
           //retorna os valores padroes das meta tags
-          document.title = 'Imóveis Gentil | Lambari MG';
+          document.title = 'Luiza Gentil | Corretora de Imóveis';
           if(MetaDescription){
-            MetaDescription.setAttribute('content', 'Bem-vindo à Imóveis Gentil. Somos especialistas em encontrar o lar perfeito para você e sua família. Com uma abordagem gentil e personalizada, oferecemos uma ampla seleção de propriedades que atendem às suas necessidades e estilo de vida. Deixe-nos ajudá-lo a encontrar o lar dos seus sonhos com a gentileza e a expertise que você merece.')
+            MetaDescription.setAttribute('content', 'Somos especialistas em encontrar o lar perfeito para você e sua família. Com uma abordagem gentil e personalizada, oferecemos uma ampla seleção de propriedades que atendem às suas necessidades e estilo de vida. Deixe-nos ajudá-lo a encontrar o lar dos seus sonhos com a gentileza e a expertise que você merece.')
           }
         };
       }

@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { useSearchParams } from 'react-router-dom';
 import LoadingCard from '../../UI/LoadingCard';
 import WhatsappBtn from '../../components/WhatsappBtn';
+import DestaqueCard from '../../components/layout/DestaqueCard';
 
 const Home = () => {
     const [aluguel, setAluguel] = useState(false);
@@ -105,7 +106,7 @@ const Home = () => {
                 <Search onFilterChange={handleFilterChange} />
             </section>
             <article className='destaques'>
-                
+                <DestaqueCard />
             </article>
             <section className='cards'>
                 <h1 className='section-title'>Principais Resultados</h1>
@@ -120,6 +121,7 @@ const Home = () => {
                 <div className='card-area'>
                     {loading || firstLoad ? (
                         <>
+                            <LoadingCard />
                             <LoadingCard />
                             <LoadingCard />
                             <LoadingCard />

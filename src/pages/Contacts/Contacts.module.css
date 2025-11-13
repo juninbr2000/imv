@@ -3,7 +3,10 @@
     padding: 20px;   
 }
 .main_title{
-    font-size: 1.8em;
+    font-family: "Castoro", serif;
+    font-weight: 400;
+    font-size: 2em;
+    text-align: center;
 }
 .local_cont{
     background-color: #192436;
@@ -31,7 +34,6 @@
 .card{
     background-color: #acadb0;
     margin-top: 15px;
-    border-radius: 10px;
     padding: 20px;
     & .destaque{
         padding: 8px 10px;

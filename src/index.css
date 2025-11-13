@@ -9,7 +9,7 @@ body{
 }
 .primary_btn{
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #192436;
   color: #C5AD69;
   border: none;
@@ -28,7 +28,7 @@ body{
   background-color: #e4e4e4;
   color: #192436;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px 15px;
   font-weight: bold;
   margin: 5px 5px;
@@ -38,6 +38,8 @@ body{
   margin-left: 5px;
   & .section-title{
     margin-left: 15px;
+    font-family: "Castoro", serif;
+    font-weight: 400;
   }
 }
 .card-area{
@@ -63,7 +65,6 @@ body{
     display: flex;
     align-items: center;  
     justify-content: center;
-    border-radius: 30px;
     transition: all .5s ease;
     cursor: pointer;
     font-size: .7em;
@@ -157,7 +158,6 @@ body{
   padding: 5px;
   & button{
     padding: 10px 15px;
-    border-radius: 10px;
     border: none;
     background-color: #192436;
     color: #C5AD69;
@@ -198,14 +198,19 @@ body{
   }
   .header_style{
     height: 55em;
-    width: 1024px;
+    max-width: 1240px;
     margin: 0 auto;
   }
   .search{
-    width: 1024px;
+    max-width: 1240px;
     max-height: 680px;
   }
   .cards{
     width: 1024px;
+  }
+}
+@media screen and (min-width: 1240px){
+  .cards{
+    width: 1240px;
   }
 }

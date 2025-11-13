@@ -1,12 +1,11 @@
 .nav_container{
-    padding: 10px 15px;
+    padding: 15px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.logo svg{
-    width: 120px;
-    height: 80px;
+.logo img{
+    width: 140px;
 }
 .btn_menu{
     padding: 5px 15px;
@@ -25,7 +24,7 @@
 }
 .menu{
     position: absolute;
-    top: 106px;
+    top: 85px;
     left: 0;
     z-index: 5;
     animation: menuInOut .5s 1 ease-in-out;
@@ -81,8 +80,9 @@ li a{
 
 @media screen and (min-width: 788px){
     .nav_container{
-        max-width: 1024px;
+        max-width: 1240px;
         margin: auto;
+        box-sizing: border-box;
     }
     .btn_menu{
         display: none;
@@ -137,6 +137,6 @@ li a{
         top: -500px;
     }
     100%{
-        top: 106px
+        top: 85px
     }
 }

@@ -20,6 +20,7 @@ import Aboult from "./pages/Aboult/Aboult";
 import NotFound from "./pages/NotFound/NotFound";
 import CookieConset from "./components/layout/CookieConsent";
 import Anuncie from "./pages/Anuncie/Anuncie";
+import DestaquePage from "./pages/Destaque/DestaquePage";
 
 function App() {
 
@@ -47,6 +48,9 @@ function App() {
           <Route path="/contato" element={<Contacts />} />
           <Route path="/sobre" element={<Aboult />} />
           <Route path="/anuncie" element={<Anuncie />} />
+
+          <Route path="/js-residencial" element={<DestaquePage />} />
+          
           <Route path="/dashboard" element={!user ? <Login/> : <Dashboard />} />
           <Route path='/admLogin' element={!user ? <Login/> : <Navigate to="/dashboard"/>}/>
           <Route path="/create" element={!user? <Login/> : <CreateDoc/>} />

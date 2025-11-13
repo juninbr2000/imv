@@ -9,8 +9,9 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
-    & svg {
+    & img {
         margin-right: 20px;
+        width: 25%;
     }
 }
 .contact{
@@ -64,20 +65,24 @@
     text-align: center;
 }
 
-@media screen and (min-width: 788px){
+@media screen and (min-width: 1024px){
     .footer_container{
         width: 100%;
         margin: 20px auto 0;
         padding: 50px 50px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
     }
     .footer_container > div{
-        max-width: 1024px;
+        max-width: 1240px;
         margin: auto;
+        box-sizing: border-box;
     }
     .logo_info{
-        & svg{
-            width: 180px;
-            height: 70px;
+        & img{
+            width: 200px;
         }
         & h3{
             font-size: 30px;
@@ -86,15 +91,21 @@
     .footer_container .contact{
         margin-top: 50px;
         margin-bottom: 40px;
+        width: 45%;
     }
     .social{
         padding: 10px 30px;
         display: flex;
+        width: 100%;
         align-items: center;
         justify-content: space-between;
+        margin: 0;
         gap: 20px;
         & svg{
             font-size: 55px;
         }
+    }
+    .credit{
+        width: 100%;
     }
 }

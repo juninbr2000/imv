@@ -38,10 +38,10 @@ const Card = ({ venda }) => {
         </div>
         <div className={styles.card_info}>
           <div className='price'>
-            <h1>{venda.valor.toLocaleString('pt-br', {style: "currency", currency: "BRL"})}</h1>
-            {venda.aluguel && <p className='aluguel'>/Mês</p>}
+            <h1>{venda.titulo}</h1>
           </div>
-            <h3>{venda.titulo}</h3>
+            <h3>{venda.valor.toLocaleString('pt-br', {style: "currency", currency: "BRL"})}</h3>
+            {venda.aluguel && <p className='aluguel'>/Mês</p>}
             {venda.tipo === 'Terreno' ? (venda.area > 0 && <p style={{fontSize: '.9em', textAlign: 'center', marginTop: '10px'}}><BsArrowsAngleExpand/> {venda.area} m²</p>) : 
             (venda && caracteristicas.length > 0 ? <div className={styles.fast_inf}>
               {caracteristicas.filter(itens => itens.ativado === 'true').slice(0, 4).map(item => (

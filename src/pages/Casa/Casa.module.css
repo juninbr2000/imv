@@ -6,11 +6,11 @@
     align-items: center;
     justify-content: space-between;
     background-color: #eae9e9;
-    border-radius: 0 0 15px 15px;
+    border-radius: 5px;
     position: relative;
     & .image{
         height: 100%;
-        border-radius: 0 0 15px 15px;
+        border-radius: 5px;
         min-height: 260px;
         max-width: 100%;
         box-shadow: 2px 1px 20px #0000003a;
@@ -52,7 +52,7 @@
 }
 .casa_info_cont{
     margin-top: 20px;
-    border-radius: 20px;
+    border-radius: 5px;
     background-color: #e4e4e4;
     padding: 10px 25px;
     box-shadow: 2px 1px 20px #5555553a;
@@ -131,6 +131,8 @@
 .title{
     color: #818181;
     margin-top: 20px;
+    font-family: "Castoro", serif;
+    font-weight: 400;
 }
 .fast_info{
     display: flex;
@@ -161,7 +163,7 @@
     padding: 15px 25px;
     margin-top: 30px;
     background-color: #192436;
-    border-radius: 20px;
+    border-radius: 5px;
     color: #818181;
     & h2{
         color: #C5AD69;
@@ -295,8 +297,7 @@
     justify-content: center;
     z-index: 1000;
     & img{
-        width: 100%;
-        height: auto;
+        height: 100vh;
     }
 }
 .close{

@@ -10,7 +10,7 @@ const Contacts = () => {
 
   return (
     <div className={styles.contact_container}>
-        <h1 className={styles.main_title}><span>Entre em Contato</span> com a Gente</h1>
+        <h1 className={styles.main_title}>Entre em Contato com a Gente</h1>
         <div className={styles.local_cont}>
           <div className={styles.local_info}>
             <h3>Nosso Horario de Atendimento:</h3>
