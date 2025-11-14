@@ -8,8 +8,12 @@
     background-repeat: no-repeat;
     background-position: left;
     background-size: cover;
-    }
-
+    box-shadow: 0 0 20px #00000045;
+    transition: all .3s ease;
+}
+.destaqueCard:hover{
+    transform: scale(1.005);
+}
 .widget{
     position: absolute;
     top: 20px;
@@ -23,10 +27,9 @@
 .content{
     color: #fefefe;
     margin-top: 50px;
-    & h2{
-        font-family: "Castoro", serif;
-        font-weight: 400;
-        font-size: 2em;
+    & img{
+        width: 250px;
+        margin-bottom: 16px;
     }
     & p{
         margin-bottom: 80px;
@@ -46,7 +49,13 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    cursor: pointer;
     font-size: 1em;
+    transition: all .3s ease;
+}
+
+.btn:hover{
+    background-color: #b19a59;
 }
 
 @media screen and (min-width: 790px){
@@ -67,6 +76,10 @@
 }
 
 @media screen and (min-width: 790px){
+    .content img{
+        width: 350px;
+        margin-bottom: 16px;
+    }
     .destaqueCard{
         display: block;
         width: 780px;
@@ -74,6 +87,9 @@
 }
 
 @media screen and (min-width: 1240px) {
+    .content{
+        padding: 40px;
+    }
     .destaqueCard{
         width: 1220px;
     }

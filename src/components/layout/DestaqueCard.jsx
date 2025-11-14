@@ -8,7 +8,7 @@ const DestaqueCard = () => {
   return (
     <div className={styles.destaqueCard}> 
         <div className={styles.content}>
-            <h2>Js Residencial</h2>
+            <img src="/jsresidencial/logoJSResidencial.png" alt="JS Residencial" />
             <p>Lotes apartir de R$ 264.000,00</p>
             <button className={styles.btn} onClick={() => navigate('/js-residencial')}>Ver mais <FaArrowRight /></button>
         </div>

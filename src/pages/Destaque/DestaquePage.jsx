@@ -22,12 +22,26 @@ const DestaquePage = () => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1 className={styles.mainTitle}>Js Residencial</h1>
+                <img src="/jsresidencial/logoJSResidencial.png" alt="JS Residencial" width={'50%'}/>
+                {/* <h1 className={styles.mainTitle}>Js Residencial</h1> */}
                 <p>O primeiro condominio fechado de Lambari</p>
             </div>
             <div className={styles.map}>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3699.7659423898413!2d-45.34846983524349!3d-21.981944394607968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1762963710760!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <p>Localizado a menos de 5 minutos do centro de Lambari</p>
+                {/* <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3699.7659423898413!2d-45.34846983524349!3d-21.981944394607968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1762963710760!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
+                <img src="/jsresidencial/map.png" alt="" />
+                <p className={styles.minContent}>Localizado a menos de 5 minutos do centro de Lambari</p>
+                <div className={styles.maxContent}>
+                    <h2>Tenha Uma vida Marcada pela Comodidade</h2>
+                    <ul>
+                        <li>Supermercado BH - 1 minuto</li>
+                        <li>Igreja Matriz - 2 minuto</li>
+                        <li>Prefeitura - 3 minuto</li>
+                        <li>Escola - 3 minuto</li>
+                        <li>Cassino - 3 minuto</li>
+                        <li>Parque das Águas - 5 minuto</li>
+                        <li>Hospital - 6 minuto</li>
+                    </ul>
+                </div>
             </div>
 
             <div className={styles.cardsContainer}>
@@ -58,14 +72,19 @@ const DestaquePage = () => {
             </div>
 
             <div className={styles.imagesContainer}>
+                <h2 className={styles.title}>Conheça mais</h2>
+                <video src="/jsresidencial/aresentacao.mp4" controls muted width={'100%'}></video>
+            </div>
+
+            <div className={styles.imagesContainer}>
                 <h2 className={styles.title}>Galeria de Fotos</h2>
                 <div className={styles.imagesGrid}>
-                    <img src={'/public/jsresidencial/portaria.png'} alt="Portaria js residencial" />
-                    <img src={"/public/jsresidencial/Deck.png"} alt="deck seco" />
-                    <img src={"/public/jsresidencial/area-gourmet.png"} alt="area gourmet" />
-                    <img src={"/public/jsresidencial/academia.png"} alt="academia" />
-                    <img src={"/public/jsresidencial/quadra-de-areia.png"} alt="quadra de areia" />
-                    <img src={"/public/jsresidencial/piscina.png"} alt="piscina" />
+                    <img src={'/jsresidencial/portaria.png'} alt="Portaria js residencial" className={styles.firstImage}/>
+                    <img src={"/jsresidencial/Deck.png"} alt="deck seco" />
+                    <img src={"/jsresidencial/area-gourmet.png"} alt="area gourmet" />
+                    <img src={"/jsresidencial/academia.png"} alt="academia" />
+                    <img src={"/jsresidencial/quadra-de-areia.png"} alt="quadra de areia" />
+                    <img src={"/jsresidencial/piscina.png"} alt="piscina" className={styles.lastImage}/>
                 </div>
             </div>
 

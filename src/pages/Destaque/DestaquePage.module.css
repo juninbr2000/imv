@@ -2,8 +2,9 @@
   background-color: #FAF9F6;
 }
 .header{
-    background: linear-gradient(0deg, #192436 25%, #19243600 75%),
-                url('/public/jsresidencial/portaria.png');
+    background: 
+      linear-gradient(0deg, #131d2c 25%, #19243685 75%),
+      url('/public/jsresidencial/portaria.png');
     padding: 280px 20px 60px;
     text-align: center;
     background-repeat: no-repeat;
@@ -37,6 +38,12 @@
         height: 300px;
         margin-bottom: 15px;
     }
+    & img{
+      width: 100%;
+    }
+}
+.maxContent{
+  display: none;
 }
 
 .cardsContainer{
@@ -56,6 +63,7 @@
     justify-content: center;
     padding: 20px 25px;
     text-align: center;
+    border: 1px solid #c5ad6925;
     & svg{
         font-size: 32px;
         margin-bottom: 16px;
@@ -197,11 +205,40 @@
 }
 
 @media screen and (min-width: 705px) {
+  .header img{
+    width: 300px;
+  }
   .cardsContainer{
     justify-content: center;
   }
   .card{
     max-width: 230px;
+  }
+  .map{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    & iframe{
+      height: 400px;
+    }
+    & img{
+      width: 50%;
+    }
+  }
+  .minContent{
+    display: none;
+  }
+  .maxContent{
+    display: block;
+    width: 40%;
+    text-align: left;
+    & h2{
+      font-family: 'Castoro', serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
   }
   .contactInfo li:nth-child(2){
     border: none;
@@ -215,12 +252,7 @@
     max-width: 1240px;
     margin: 0 auto;
   }
-  .map{
-    max-width: 1000px;
-    & iframe{
-      height: 400px;
-    }
-  }
+  
   .cardsContainer{
     max-width: 1240px;
     margin: auto;
@@ -228,6 +260,17 @@
   .imagesContainer{
     max-width: 1240px;
     margin: auto;
+    & video{
+      width: 70%;
+    }
+  }
+
+  .imagesGrid .firstImage {
+    grid-column: span 2;
+  }
+
+  .imagesGrid .lastImage {
+    grid-column: span 2;
   }
   .contactInfo ul{
     align-items: unset;
